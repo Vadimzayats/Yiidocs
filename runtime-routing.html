@@ -1,0 +1,1220 @@
+<html><!-- Mirrored from www.yiiframework.com/doc/guide/2.0/en/runtime-routing by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 10 Aug 2024 08:30:37 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="../../../../favico/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../../../favico/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../../../favico/favicon-16x16.png">
+        <link rel="icon" type="image/svg+xml" href="../../../../favico/favicon.svg">
+        <link rel="icon" type="image/png" href="../../../../favico/favicon.png">
+        <link rel="shortcut icon" href="../../../../favico/favicon.ico">
+        <link rel="manifest" href="../../../../favico/manifest.json">
+        <link rel="mask-icon" href="../../../../favico/safari-pinned-tab.svg" color="#1e6887">
+        <meta name="msapplication-config" content="https://www.yiiframework.com/favico/browserconfig.xml">
+        <meta name="theme-color" content="#1e6887">
+
+        <link href="https://www.yiiframework.com/rss.xml" type="application/rss+xml" rel="alternate" title="Lives News for Yii Framework">
+
+        <meta name="csrf-param" content="_csrf">
+<meta name="csrf-token" content="p2sqAgtOfx9xyGbjiRlFM44URf3Gk1M7EHjjITrcR83zGFlwPBkRTxy4FprzYApJ2SF9k4r3N2IhMdJyY7tqhg==">
+        
+        <title>Routing and URL Creation</title>
+
+        <meta property="og:site_name" content="Yii Framework">
+        <meta property="og:title" content="Handling Requests: Routing and URL Creation">
+        <meta property="og:image" content="../../../../image/facebook_cover.png">
+        <meta property="og:url" content="/doc/guide/2.0/en/runtime-routing">
+        <meta property="og:description" content="">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="yiiframework">
+        <meta name="twitter:title" content="Handling Requests: Routing and URL Creation">
+        <meta name="twitter:description" content="">
+        <meta name="twitter:image" content="../../../../image/twitter_cover.png">
+        <meta name="twitter:image:width" content="120">
+        <meta name="twitter:image:height" content="120">
+
+        <link type="application/opensearchdescription+xml" href="https://www.yiiframework.com/opensearch.xml" title="Yii Search" rel="search">
+<link href="../../../../assets/968a6cee/css/all.mina875.css?v=1702740886" rel="stylesheet">
+<script>yiiBaseUrl = ""
+yiiSearchLanguage = "en"
+yiiSearchVersion = "2.0"</script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-707ZP35KCT"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-707ZP35KCT');
+</script>
+    </head>
+    <body data-spy="scroll" data-target="#scrollnav" data-offset="1">
+        
+        <div id="page-wrapper" class="">
+
+            <header class="navbar navbar-inverse navbar-static" id="top">
+    <div class="container">
+        <div id="main-nav-head" class="navbar-header">
+            <a href="https://www.yiiframework.com/" class="navbar-brand">
+                <img src="../../../../image/logo.svg" alt="Yii PHP Framework" width="165" height="35">
+            </a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" aria-label="Toggle navigation" data-target=".navbar-collapse"><i class="fa fa-inverse fa-bars"></i></button>
+        </div>
+
+        <div class="navbar-collapse collapse navbar-right">
+            <ul id="main-nav" class="nav navbar-nav navbar-main-menu nav"><li class="active" title="The Definitive Guide to Yii"><a href="../en.html">Guide</a></li>
+<li title="API Documentation"><a href="../../../api/2.html">API</a></li>
+<li title="Community Wiki"><a href="https://www.yiiframework.com/wiki">Wiki</a></li>
+<li title="Community Forum"><a href="https://www.yiiframework.com/forum">Forum</a></li>
+<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Community <span class="caret"></span></a><ul id="w16" class="dropdown-menu"><li><a href="https://www.yiiframework.com/chat" tabindex="-1">Live Chat</a></li>
+<li title="Extensions"><a href="https://www.yiiframework.com/extensions" tabindex="-1">Extensions</a></li>
+<li><a href="https://www.yiiframework.com/community" tabindex="-1">Resources</a></li>
+<li title="Community Members"><a href="https://www.yiiframework.com/user" tabindex="-1">Members</a></li>
+<li title="Community Hall of Fame"><a href="https://www.yiiframework.com/user/halloffame" tabindex="-1">Hall of Fame</a></li>
+<li title="Community Badges"><a href="https://www.yiiframework.com/badges" tabindex="-1">Badges</a></li></ul></li>
+<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">More <span class="caret"></span></a><ul id="w17" class="dropdown-menu"><li class="separator dropdown-header">Learn</li>
+<li><a href="https://www.yiiframework.com/books" tabindex="-1">Books</a></li>
+<li><a href="https://www.yiiframework.com/resources" tabindex="-1">Resources</a></li>
+<li class="separator dropdown-header">Develop</li>
+<li><a href="https://www.yiiframework.com/download" tabindex="-1">Download Yii</a></li>
+<li><a href="https://www.yiiframework.com/report-issue" tabindex="-1">Report an Issue</a></li>
+<li><a href="https://www.yiiframework.com/security" tabindex="-1">Report a Security Issue</a></li>
+<li><a href="https://www.yiiframework.com/contribute" tabindex="-1">Contribute to Yii</a></li>
+<li><a href="https://www.yiiframework.com/donate" tabindex="-1">Donate</a></li>
+<li class="separator dropdown-header">About</li>
+<li><a href="intro-yii.html" tabindex="-1">What is Yii?</a></li>
+<li><a href="https://www.yiiframework.com/release-cycle" tabindex="-1">Release Cycle</a></li>
+<li><a href="https://www.yiiframework.com/news" tabindex="-1">News</a></li>
+<li><a href="https://www.yiiframework.com/license" tabindex="-1">License</a></li>
+<li><a href="https://www.yiiframework.com/team" tabindex="-1">Team</a></li>
+<li><a href="https://www.yiiframework.com/logo" tabindex="-1">Official Logos and Design</a></li></ul></li></ul>
+            
+            <div class="nav navbar-nav navbar-right">
+                <ul id="login-nav" class="nav navbar-nav navbar-main-menu nav"><li><a href="https://www.yiiframework.com/login">Login</a></li></ul>            </div>
+
+            <div class="nav navbar-nav navbar-right">
+                        <form id="search-form" class="navbar-form" action="https://www.yiiframework.com/search" method="get">
+<input type="hidden" name="language" value="en">
+<input type="hidden" name="version" value="2.0">
+<input type="hidden" name="type" value="guide">        <div class="form-group nospace">
+            <div class="input-group">
+                <input type="text" class="form-control" id="search" name="q" placeholder="Search Guide…" autocomplete="off" value="">
+            </div>
+        </div>
+        <div id="search-resultbox"></div>
+        </form>            </div>
+
+            
+        </div>
+    </div>
+</header>
+
+            <div class="section-header-wrap">
+    <div class="container section-header lang-en">
+        <div class="row headline-row">
+            <div class="col-xs-12 col-md-12">
+                <div class="section-headline">The Definitive Guide to Yii 2.0</div>
+            </div>
+                    </div>
+                <div class="row content-selector-row">
+            <div class="col-xs-12 col-md-offset-7 col-md-5">
+                <nav class="version-selector">
+        <div class="btn-group btn-group-justified btn-group-3-element">
+        <div class="btn-group btn-group-sm"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Download <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li role="presentation"><a href="https://www.yiiframework.com/doc/download/yii-guide-2.0-en.pdf" role="menuitem" tabindex="-1">PDF</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/download/yii-docs-2.0-en.tar.gz" role="menuitem" tabindex="-1">Offline HTML (tar.gz)</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/download/yii-docs-2.0-en.tar.bz2" role="menuitem" tabindex="-1">Offline HTML (tar.bz2)</a></li></ul></div>                <div class="btn-group btn-group-sm"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">English <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/ar/runtime-routing" role="menuitem" tabindex="-1">العربية</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/es/runtime-routing" role="menuitem" tabindex="-1">Español</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/fr/runtime-routing" role="menuitem" tabindex="-1">Français</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/id/runtime-routing" role="menuitem" tabindex="-1">Bahasa Indonesia</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/ja/runtime-routing" role="menuitem" tabindex="-1">日本語</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/pl/runtime-routing" role="menuitem" tabindex="-1">Polski</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/pt-br/runtime-routing" role="menuitem" tabindex="-1">Português brasileiro</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/ru/runtime-routing" role="menuitem" tabindex="-1">Русский</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/uk/runtime-routing" role="menuitem" tabindex="-1">Українська</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/uz/runtime-routing" role="menuitem" tabindex="-1">Oʻzbekcha</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/zh-cn/runtime-routing" role="menuitem" tabindex="-1">简体中文</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/vi/runtime-routing" role="menuitem" tabindex="-1">Tiếng Việt</a></li></ul></div>
+                <div class="btn-group btn-group-sm"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Version 2.0 <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li role="presentation"><a href="https://www.yiiframework.com/doc/guide/1.1/en" role="menuitem" tabindex="-1">1.1</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/1.0/en" role="menuitem" tabindex="-1">1.0</a></li></ul></div>    </div>
+</nav>
+            </div>
+        </div>
+            </div>
+</div>
+
+                        <div class="visible-huge fixed lang-en">
+    <nav id="scrollnav" data-spy="affix" data-offset-top="120">
+        <ul class="nav hidden-xs hidden-sm">
+            <li><a href="#routing-and-url-creation">Routing and URL Creation</a></li><li><a href="#url-formats">URL Formats</a></li><li><a href="#routing">Routing</a><ul class="nav"><li class="subheading"><a href="#default-route">Default Route</a></li><li class="subheading"><a href="#catchall-route">catchAll Route</a></li></ul></li><li><a href="#creating-urls">Creating URLs</a></li><li><a href="#using-pretty-urls">Using Pretty URLs</a><ul class="nav"><li class="subheading"><a href="#url-rules">URL Rules</a></li><li class="subheading"><a href="#named-parameters">Named Parameters</a></li><li class="subheading"><a href="#parameterizing-routes">Parameterizing Routes</a></li><li class="subheading"><a href="#default-parameter-values">Default Parameter Values</a></li><li class="subheading"><a href="#rules-with-server-names">Rules with Server Names</a></li><li class="subheading"><a href="#url-suffixes">URL Suffixes</a></li><li class="subheading"><a href="#http-methods">HTTP Methods</a></li><li class="subheading"><a href="#adding-rules">Adding Rules Dynamically</a></li><li class="subheading"><a href="#creating-rules">Creating Rule Classes</a></li></ul></li><li><a href="#url-normalization">URL normalization</a></li><li><a href="#performance-consideration">Performance Considerations</a></li><li><a href="#user-notes">User Contributed Notes</a></li>        </ul>
+    </nav>
+</div>
+<div class="container guide-view" xmlns="http://www.w3.org/1999/xhtml">
+    <div class="row visible-xs">
+        <div class="col-md-12">
+            <p class="pull-right topmost">
+                <button type="button" title="Toggle Side-Nav" class="btn btn-primary btn-xs" data-toggle="offcanvas">SideNav</button>
+            </p>
+        </div>
+    </div>
+    <div class="row row-offcanvas">
+        <div class="col-sm-3 col-md-3 col-lg-3 lang-en">
+            <form class="mini-search-form" action="https://www.yiiframework.com/search" method="get">
+<input type="hidden" name="language" value="en">
+<input type="hidden" name="version" value="2.0">
+<input type="hidden" name="type" value="guide"><input type="text" class="form-control" name="q" placeholder="Search the Guide…" autocomplete="off" aria-label="Search box"> <button type="submit" class="btn btn-primary sr-only">Search</button></form>            <div id="guide-navigation" class="sidenav-offcanvas"><a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-0">Introduction</a><div id="guide-navigation-0" class="submenu panel-collapse collapse"><a class="list-group-item" href="intro-yii.html">About Yii</a>
+<a class="list-group-item" href="intro-upgrade-from-v1.html">Upgrading from Version 1.1</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-1">Getting Started</a><div id="guide-navigation-1" class="submenu panel-collapse collapse"><a class="list-group-item" href="start-prerequisites.html">What do you need to know</a>
+<a class="list-group-item" href="start-installation.html">Installing Yii</a>
+<a class="list-group-item" href="start-workflow.html">Running Applications</a>
+<a class="list-group-item" href="start-hello.html">Saying Hello</a>
+<a class="list-group-item" href="start-forms.html">Working with Forms</a>
+<a class="list-group-item" href="start-databases.html">Working with Databases</a>
+<a class="list-group-item" href="start-gii.html">Generating Code with Gii</a>
+<a class="list-group-item" href="start-looking-ahead.html">Looking Ahead</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-2">Application Structure</a><div id="guide-navigation-2" class="submenu panel-collapse collapse"><a class="list-group-item" href="structure-overview.html">Application Structure Overview</a>
+<a class="list-group-item" href="structure-entry-scripts.html">Entry Scripts</a>
+<a class="list-group-item" href="structure-applications.html">Applications</a>
+<a class="list-group-item" href="structure-application-components.html">Application Components</a>
+<a class="list-group-item" href="structure-controllers.html">Controllers</a>
+<a class="list-group-item" href="structure-models.html">Models</a>
+<a class="list-group-item" href="structure-views.html">Views</a>
+<a class="list-group-item" href="layouts-admin.html">Admin Layouts</a>
+<a class="list-group-item" href="structure-modules.html">Modules</a>
+<a class="list-group-item" href="structure-filters.html">Filters</a>
+<a class="list-group-item" href="structure-widgets.html">Widgets</a>
+<a class="list-group-item" href="structure-assets.html">Assets</a>
+<a class="list-group-item" href="structure-extensions.html">Extensions</a></div>
+<a class="list-group-item has-children active" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-3">Handling Requests</a><div id="guide-navigation-3" class="submenu panel-collapse collapse in active-parent"><a class="list-group-item" href="runtime-overview.html">Request Handling Overview</a>
+<a class="list-group-item" href="runtime-bootstrapping.html">Bootstrapping</a>
+<a class="list-group-item active" href="runtime-routing.html">Routing and URL Creation</a>
+<a class="list-group-item" href="runtime-requests.html">Requests</a>
+<a class="list-group-item" href="runtime-responses.html">Responses</a>
+<a class="list-group-item" href="runtime-sessions-cookies.html">Sessions and Cookies</a>
+<a class="list-group-item" href="runtime-handling-errors.html">Handling Errors</a>
+<a class="list-group-item" href="runtime-logging.html">Logging</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-4">Key Concepts</a><div id="guide-navigation-4" class="submenu panel-collapse collapse"><a class="list-group-item" href="concept-components.html">Components</a>
+<a class="list-group-item" href="concept-properties.html">Properties</a>
+<a class="list-group-item" href="concept-events.html">Events</a>
+<a class="list-group-item" href="concept-behaviors.html">Behaviors</a>
+<a class="list-group-item" href="concept-configurations.html">Configurations</a>
+<a class="list-group-item" href="concept-aliases.html">Aliases</a>
+<a class="list-group-item" href="concept-autoloading.html">Class Autoloading</a>
+<a class="list-group-item" href="concept-service-locator.html">Service Locator</a>
+<a class="list-group-item" href="concept-di-container.html">Dependency Injection Container</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-5">Working with Databases</a><div id="guide-navigation-5" class="submenu panel-collapse collapse"><a class="list-group-item" href="db-dao.html">Database Access Objects</a>
+<a class="list-group-item" href="db-query-builder.html">Query Builder</a>
+<a class="list-group-item" href="db-active-record.html">Active Record</a>
+<a class="list-group-item" href="db-migrations.html">Migrations</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-sphinx/doc/guide/2.0/en.html">Sphinx</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-redis/doc/guide/2.0/en.html">Redis</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-mongodb/doc/guide/3.0/en.html">MongoDB</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-elasticsearch/doc/guide/2.1/en.html">ElasticSearch</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-6">Getting Data from Users</a><div id="guide-navigation-6" class="submenu panel-collapse collapse"><a class="list-group-item" href="input-forms.html">Creating Forms</a>
+<a class="list-group-item" href="input-validation.html">Validating Input</a>
+<a class="list-group-item" href="input-file-upload.html">Uploading Files</a>
+<a class="list-group-item" href="input-tabular-input.html">Collecting Tabular Input</a>
+<a class="list-group-item" href="input-multiple-models.html">Getting Data for Multiple Models</a>
+<a class="list-group-item" href="input-form-javascript.html">Extending ActiveForm on the Client Side</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-7">Displaying Data</a><div id="guide-navigation-7" class="submenu panel-collapse collapse"><a class="list-group-item" href="output-formatting.html">Data Formatting</a>
+<a class="list-group-item" href="output-pagination.html">Pagination</a>
+<a class="list-group-item" href="output-sorting.html">Sorting</a>
+<a class="list-group-item" href="output-data-providers.html">Data Providers</a>
+<a class="list-group-item" href="output-data-widgets.html">Data Widgets</a>
+<a class="list-group-item" href="output-client-scripts.html">Working with Client Scripts</a>
+<a class="list-group-item" href="output-theming.html">Theming</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-8">Security</a><div id="guide-navigation-8" class="submenu panel-collapse collapse"><a class="list-group-item" href="security-overview.html">Security Overview</a>
+<a class="list-group-item" href="security-authentication.html">Authentication</a>
+<a class="list-group-item" href="security-authorization.html">Authorization</a>
+<a class="list-group-item" href="security-passwords.html">Working with Passwords</a>
+<a class="list-group-item" href="security-cryptography.html">Cryptography</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-authclient/doc/guide/2.2/en.html">Auth Clients</a>
+<a class="list-group-item" href="security-best-practices.html">Best Practices</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-9">Caching</a><div id="guide-navigation-9" class="submenu panel-collapse collapse"><a class="list-group-item" href="caching-overview.html">Caching Overview</a>
+<a class="list-group-item" href="caching-data.html">Data Caching</a>
+<a class="list-group-item" href="caching-fragment.html">Fragment Caching</a>
+<a class="list-group-item" href="caching-page.html">Page Caching</a>
+<a class="list-group-item" href="caching-http.html">HTTP Caching</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-10">RESTful Web Services</a><div id="guide-navigation-10" class="submenu panel-collapse collapse"><a class="list-group-item" href="rest-quick-start.html">Quick Start</a>
+<a class="list-group-item" href="rest-resources.html">Resources</a>
+<a class="list-group-item" href="rest-controllers.html">Controllers</a>
+<a class="list-group-item" href="rest-filtering-collections.html">Filtering Collections</a>
+<a class="list-group-item" href="rest-routing.html">Routing</a>
+<a class="list-group-item" href="rest-response-formatting.html">Response Formatting</a>
+<a class="list-group-item" href="rest-authentication.html">Authentication</a>
+<a class="list-group-item" href="rest-rate-limiting.html">Rate Limiting</a>
+<a class="list-group-item" href="rest-versioning.html">Versioning</a>
+<a class="list-group-item" href="rest-error-handling.html">Error Handling</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-11">Development Tools</a><div id="guide-navigation-11" class="submenu panel-collapse collapse"><a class="list-group-item" href="../../../../extension/yiisoft/yii2-debug/doc/guide/3.0/en.html">Debug Toolbar and Debugger</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-gii/doc/guide/2.2/en.html">Generating Code using Gii</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-apidoc.html">Generating API Documentation</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-12">Testing</a><div id="guide-navigation-12" class="submenu panel-collapse collapse"><a class="list-group-item" href="test-overview.html">Testing Overview</a>
+<a class="list-group-item" href="test-environment-setup.html">Testing environment setup</a>
+<a class="list-group-item" href="test-unit.html">Unit Tests</a>
+<a class="list-group-item" href="test-functional.html">Functional Tests</a>
+<a class="list-group-item" href="test-acceptance.html">Acceptance Tests</a>
+<a class="list-group-item" href="test-fixtures.html">Fixtures</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-13">Special Topics</a><div id="guide-navigation-13" class="submenu panel-collapse collapse"><a class="list-group-item" href="../../../../extension/yiisoft/yii2-app-advanced/doc/guide/2.0/en.html">Advanced Project Template</a>
+<a class="list-group-item" href="tutorial-start-from-scratch.html">Building Application from Scratch</a>
+<a class="list-group-item" href="tutorial-console.html">Console Commands</a>
+<a class="list-group-item" href="tutorial-core-validators.html">Core Validators</a>
+<a class="list-group-item" href="tutorial-docker.html">Docker</a>
+<a class="list-group-item" href="tutorial-i18n.html">Internationalization</a>
+<a class="list-group-item" href="tutorial-mailing.html">Mailing</a>
+<a class="list-group-item" href="tutorial-performance-tuning.html">Performance Tuning</a>
+<a class="list-group-item" href="tutorial-shared-hosting.html">Shared Hosting Environment</a>
+<a class="list-group-item" href="tutorial-template-engines.html">Template Engines</a>
+<a class="list-group-item" href="tutorial-yii-integration.html">Working with Third-Party Code</a>
+<a class="list-group-item" href="tutorial-yii-as-micro-framework.html">Using Yii as a micro framework</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-14">Widgets</a><div id="guide-navigation-14" class="submenu panel-collapse collapse"><a class="list-group-item" href="https://www.yiiframework.com/doc-2.0/yii-grid-gridview.html">GridView</a>
+<a class="list-group-item" href="https://www.yiiframework.com/doc-2.0/yii-widgets-listview.html">ListView</a>
+<a class="list-group-item" href="https://www.yiiframework.com/doc-2.0/yii-widgets-detailview.html">DetailView</a>
+<a class="list-group-item" href="https://www.yiiframework.com/doc-2.0/guide-input-forms.html#activerecord-based-forms-activeform">ActiveForm</a>
+<a class="list-group-item" href="https://www.yiiframework.com/doc-2.0/yii-widgets-pjax.html">Pjax</a>
+<a class="list-group-item" href="https://www.yiiframework.com/doc-2.0/yii-widgets-menu.html">Menu</a>
+<a class="list-group-item" href="https://www.yiiframework.com/doc-2.0/yii-widgets-linkpager.html">LinkPager</a>
+<a class="list-group-item" href="https://www.yiiframework.com/doc-2.0/yii-widgets-linksorter.html">LinkSorter</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-bootstrap/doc/guide/2.0/en.html">Bootstrap Widgets</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-jui/doc/guide/2.0/en.html">jQuery UI Widgets</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-15">Helpers</a><div id="guide-navigation-15" class="submenu panel-collapse collapse"><a class="list-group-item" href="helper-overview.html">Helpers Overview</a>
+<a class="list-group-item" href="helper-array.html">ArrayHelper</a>
+<a class="list-group-item" href="helper-html.html">Html</a>
+<a class="list-group-item" href="helper-json.html">Json</a>
+<a class="list-group-item" href="helper-url.html">Url</a></div></div>        </div>
+        <div class="col-sm-9 col-md-9 col-lg-9" role="main">
+
+            <div class="guide-content content lang-en">
+
+        <div class="pull-right">
+        
+<div class="star-wrapper">
+    <span class="fa fa-star-o" data-star-url="/ajax/star?type=doc&amp;id=176"></span>            <span class="star-count">8</span> followers    </div>
+    </div>
+
+    <h1 id="routing-and-url-creation">Routing and URL Creation <a href="#routing-and-url-creation" class="hashlink"></a></h1>
+<div class="toc hidden-lg"><ol><li><a href="#url-formats">URL Formats</a></li>
+<li><a href="#routing">Routing</a></li>
+<li><a href="#creating-urls">Creating URLs</a></li>
+<li><a href="#using-pretty-urls">Using Pretty URLs</a></li>
+<li><a href="#url-normalization">URL normalization</a></li>
+<li><a href="#performance-consideration">Performance Considerations</a></li></ol></div>
+<p>When a Yii application starts processing a requested URL, the first step it takes is to parse the URL
+into a <a href="structure-controllers.html#routes">route</a>. The route is then used to instantiate the corresponding
+<a href="structure-controllers.html">controller action</a> to handle the request. This whole process is called <em>routing</em>.</p>
+<p>The reverse process of routing is called <em>URL creation</em>, which creates a URL from a given route
+and the associated query parameters. When the created URL is later requested, the routing process can resolve it
+back into the original route and query parameters.</p>
+<p>The central piece responsible for routing and URL creation is the <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a>,
+which is registered as the <code>urlManager</code> <a href="structure-application-components.html">application component</a>. The <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a>
+provides the <a href="../../../api/2.0/yii-web-urlmanager.html#parseRequest()-detail">parseRequest()</a> method to parse an incoming request into
+a route and the associated query parameters and the <a href="yii-web-urlmanagerDB.html">createDatabase()</a> method to
+create a URL from a given route and its associated query parameters.</p>
+<p>By configuring the <code>urlManager</code> component in the application configuration, you can let your application
+recognize arbitrary URL formats without modifying your existing application code. For example, you can
+use the following code to create a URL for the <code>post/view</code> action:</p>
+<pre><code class="hljs php language-php"><span class="hljs-keyword">use</span> <span class="hljs-title">yii</span>\<span class="hljs-title">helpers</span>\<span class="hljs-title">Url</span>;
+
+<span class="hljs-comment">// Url::to() calls UrlManager::createUrl() to create a URL</span>
+$url = Url::to([<span class="hljs-string">'post/view'</span>, <span class="hljs-string">'id'</span> =&gt; <span class="hljs-number">100</span>]);
+</code></pre>
+<p>Depending on the <code>urlManager</code> configuration, the created URL may look like one of the following (or other format).
+And if the created URL is requested later, it will still be parsed back into the original route and query parameter value.</p>
+<pre><code class="hljs ">
+/index.php?r=post%2Fview&amp;id=100
+/index.php/post/100
+/models/User.php/25/class User extends ActiveRecord implements IdentityInterface
+</code></pre>
+<h2 id="url-formats">URL Formats  <a href="#url-formats" class="hashlink"></a></h2><p>The <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a> supports two URL formats:</p>
+<ul>
+<li>the default URL format;</li>
+<li>the pretty URL format.</li>
+</ul>
+<p>The default URL format uses a <a href="../../../api/2.0/yii-web-urlmanager.html#$routeParam-detail">query parameter</a> named <code>r</code> to represent the route and normal query parameters
+to represent the query parameters associated with the route. For example, the URL <code>/index.php?r=post/view&amp;id=100</code> represents
+the route <code>post/view</code> and the <code>id</code> query parameter <code>100</code>. The default URL format does not require any configuration of
+the <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a> and works in any Web server setup.</p>
+<p>The pretty URL format uses the extra path following the entry script name to represent the route and the associated
+query parameters. For example, the extra path in the URL <code>/index.php/post/100</code> is <code>/post/100</code> which may represent
+the route <code>post/view</code> and the <code>id</code> query parameter <code>100</code> with a proper <a href="../../../api/2.0/yii-web-urlmanager.html#$rules-detail">URL rule</a>. To use
+the pretty URL format, you will need to design a set of <a href="../../../api/2.0/yii-web-urlmanager.html#$rules-detail">URL rules</a> according to the actual
+requirement about how the URLs should look like.</p>
+<p>You may switch between the two URL formats by toggling the <a href="../../../api/2.0/yii-web-urlmanager.html#$enablePrettyUrl-detail">enablePrettyUrl</a>
+property of the <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a> without changing any other application code.</p>
+<h2 id="routing">Routing  <a href="#routing" class="hashlink"></a></h2><p>Routing involves two steps:</p>
+<ul>
+<li>the incoming request is parsed into a route and the associated query parameters;</li>
+<li>a <a href="structure-controllers.html#actions">controller action</a> corresponding to the parsed route
+is created to handle the request.</li>
+</ul>
+<p>When using the default URL format, parsing a request into a route is as simple as getting the value of a <code>GET</code>
+query parameter named <code>r</code>.</p>
+<p>When using the pretty URL format, the <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a> will examine the registered
+<a href="../../../api/2.0/yii-web-urlmanager.html#$rules-detail">URL rules</a> to find matching one that can resolve the request into a route.
+If such a rule cannot be found, a <a href="../../../api/2.0/yii-web-notfoundhttpexception.html">yii\web\NotFoundHttpException</a> exception will be thrown.</p>
+<p>Once the request is parsed into a route, it is time to create the controller action identified by the route.
+The route is broken down into multiple parts by the slashes in it. For example, <code>site/index</code> will be
+broken into <code>site</code> and <code>index</code>. Each part is an ID which may refer to a module, a controller or an action.
+Starting from the first part in the route, the application takes the following steps to create modules (if any),
+controller and action:</p>
+<ol>
+<li>Set the application as the current module.</li>
+<li>Check if the <a href="../../../api/2.0/yii-base-module.html#$controllerMap-detail">controller map</a> of the current module contains the current ID.
+If so, a controller object will be created according to the controller configuration found in the map,
+and Step 5 will be taken to handle the rest part of the route.</li>
+<li>Check if the ID refers to a module listed in the <a href="../../../api/2.0/yii-base-module.html#$modules-detail">modules</a> property of
+the current module. If so, a module is created according to the configuration found in the module list,
+and Step 2 will be taken to handle the next part of the route under the context of the newly created module.</li>
+<li>Treat the ID as a <a href="structure-controllers.html#controller-ids">controller ID</a> and create a controller object. Do the next step with the rest part of
+the route.</li>
+<li>The controller looks for the current ID in its <a href="../../../api/2.0/yii-base-controller.html#actions()-detail">action map</a>. If found,
+it creates an action according to the configuration found in the map. Otherwise, the controller will
+attempt to create an inline action which is defined by an action method corresponding to the current <a href="structure-controllers.html#action-ids">action ID</a>.</li>
+</ol>
+<p>Among the above steps, if any error occurs, a <a href="../../../api/2.0/yii-web-notfoundhttpexception.html">yii\web\NotFoundHttpException</a> will be thrown, indicating
+the failure of the routing process.</p>
+<h3 id="default-route">Default Route  <a href="#default-route" class="hashlink"></a></h3><p>When a request is parsed into an empty route, the so-called <em>default route</em> will be used, instead. By default,
+the default route is <code>site/index</code>,  which refers to the <code>index</code> action of the <code>site</code> controller. You may
+customize it by configuring the <a href="../../../api/2.0/yii-web-application.html#$defaultRoute-detail">defaultRoute</a> property of the application
+in the application configuration like the following:</p>
+<pre><code class="hljs php language-php">[
+    <span class="hljs-comment">// ...</span>
+    <span class="hljs-string">'defaultRoute'</span> =&gt; <span class="hljs-string">'main/index'</span>,
+];
+</code></pre>
+<p>Similar to the default route of the application, there is also a default route for modules, so for example if there
+is a <code>user</code> module and the request is parsed into the route <code>user</code> the module's <a href="../../../api/2.0/yii-base-module.html#$defaultRoute-detail">defaultRoute</a>
+is used to determine the controller. By default the controller name is <code>default</code>. If no action is specified in <a href="../../../api/2.0/yii-base-module.html#$defaultRoute-detail">defaultRoute</a>,
+the <a href="../../../api/2.0/yii-base-controller.html#$defaultAction-detail">defaultAction</a> property of the controller is used to determine the action.
+In this example, the full route would be <code>user/default/index</code>.</p>
+<h3 id="catchall-route"><code>catchAll</code> Route  <a href="#catchall-route" class="hashlink"></a></h3><p>Sometimes, you may want to put your Web application in maintenance mode temporarily and display the same
+informational page for all requests. There are many ways to accomplish this goal. But one of the simplest
+ways is to configure the <a href="../../../api/2.0/yii-web-application.html#$catchAll-detail">yii\web\Application::$catchAll</a> property like the following in the application configuration:</p>
+<pre><code class="hljs php language-php">[
+    <span class="hljs-comment">// ...</span>
+    <span class="hljs-string">'catchAll'</span> =&gt; [<span class="hljs-string">'site/offline'</span>],
+];
+</code></pre>
+<p>With the above configuration, the <code>site/offline</code> action will be used to handle all incoming requests.</p>
+<p>The <code>catchAll</code> property should take an array whose first element specifies a route, and
+the rest of the elements (name-value pairs) specify the parameters to be <a href="structure-controllers.html#action-parameters">bound to the action</a>.</p>
+<blockquote class="info"><p><strong>Info: </strong>The <a href="https://github.com/yiisoft/yii2-debug/blob/master/docs/guide/README.md">debug toolbar</a> in development environment
+will not work when this property is enabled.</p>
+</blockquote>
+<h2 id="creating-urls">Creating URLs  <a href="#creating-urls" class="hashlink"></a></h2><p>Yii provides a helper method <a href="../../../api/2.0/yii-helpers-baseurl.html#to()-detail">yii\helpers\Url::to()</a> to create various kinds of URLs from given routes and
+their associated query parameters. For example,</p>
+<pre><code class="hljs php language-php"><span class="hljs-keyword">use</span> <span class="hljs-title">yii</span>\<span class="hljs-title">helpers</span>\<span class="hljs-title">Url</span>;
+
+<span class="hljs-comment">// creates a URL to a route: /index.php?r=post%2Findex</span>
+<span class="hljs-keyword">echo</span> Url::to([<span class="hljs-string">'post/index'</span>]);
+
+<span class="hljs-comment">// creates a URL to a route with parameters: /index.php?r=post%2Fview&amp;id=100</span>
+<span class="hljs-keyword">echo</span> Url::to([<span class="hljs-string">'post/view'</span>, <span class="hljs-string">'id'</span> =&gt; <span class="hljs-number">100</span>]);
+
+<span class="hljs-comment">// creates an anchored URL: /index.php?r=post%2Fview&amp;id=100#content</span>
+<span class="hljs-keyword">echo</span> Url::to([<span class="hljs-string">'post/view'</span>, <span class="hljs-string">'id'</span> =&gt; <span class="hljs-number">100</span>, <span class="hljs-string">'#'</span> =&gt; <span class="hljs-string">'content'</span>]);
+
+<span class="hljs-comment">// creates an absolute URL: https://www.example.com/index.php?r=post%2Findex</span>
+<span class="hljs-keyword">echo</span> Url::to([<span class="hljs-string">'post/index'</span>], <span class="hljs-keyword">true</span>);
+
+<span class="hljs-comment">// creates an absolute URL using the https scheme: https://www.example.com/index.php?r=post%2Findex</span>
+<span class="hljs-keyword">echo</span> Url::to([<span class="hljs-string">'post/index'</span>], <span class="hljs-string">'https'</span>);
+</code></pre>
+<p>Note that in the above example, we assume the default URL format is being used. If the pretty URL format is enabled,
+the created URLs will be different, according to the <a href="../../../api/2.0/yii-web-urlmanager.html#$rules-detail">URL rules</a> in use.</p>
+<p>The route passed to the <a href="../../../api/2.0/yii-helpers-baseurl.html#to()-detail">yii\helpers\Url::to()</a> method is context sensitive. It can be either a <em>relative</em> route
+or an <em>absolute</em> route which will be normalized according to the following rules:</p>
+<ul>
+<li>If the route is an empty string, the currently requested <a href="../../../api/2.0/yii-base-controller.html#$route-detail">route</a> will be used;</li>
+<li>If the route contains no slashes at all, it is considered to be an action ID of the current controller
+and will be prepended with the <a href="../../../api/2.0/yii-base-controller.html#$uniqueId-detail">uniqueId</a> value of the current controller;</li>
+<li>If the route has no leading slash, it is considered to be a route relative to the current module and
+will be prepended with the <a href="../../../api/2.0/yii-base-module.html#$uniqueId-detail">uniqueId</a> value of the current module.</li>
+</ul>
+<p>Starting from version 2.0.2, you may specify a route in terms of an <a href="concept-aliases.html">alias</a>. If this is the case,
+the alias will first be converted into the actual route which will then be turned into an absolute route according
+to the above rules.</p>
+<p>For example, assume the current module is <code>admin</code> and the current controller is <code>post</code>,</p>
+<pre><code class="hljs php language-php"><span class="hljs-keyword">use</span> <span class="hljs-title">yii</span>\<span class="hljs-title">helpers</span>\<span class="hljs-title">Url</span>;
+
+<span class="hljs-comment">// currently requested route: /index.php?r=admin%2Fpost%2Findex</span>
+<span class="hljs-keyword">echo</span> Url::to([<span class="hljs-string">''</span>]);
+
+<span class="hljs-comment">// a relative route with action ID only: /index.php?r=admin%2Fpost%2Findex</span>
+<span class="hljs-keyword">echo</span> Url::to([<span class="hljs-string">'index'</span>]);
+
+<span class="hljs-comment">// a relative route: /index.php?r=admin%2Fpost%2Findex</span>
+<span class="hljs-keyword">echo</span> Url::to([<span class="hljs-string">'post/index'</span>]);
+
+<span class="hljs-comment">// an absolute route: /index.php?r=post%2Findex</span>
+<span class="hljs-keyword">echo</span> Url::to([<span class="hljs-string">'/post/index'</span>]);
+
+<span class="hljs-comment">// using an alias "@posts", which is defined as "/post/index": /index.php?r=post%2Findex</span>
+<span class="hljs-keyword">echo</span> Url::to([<span class="hljs-string">'@posts'</span>]);
+</code></pre>
+<p>The <a href="../../../api/2.0/yii-helpers-baseurl.html#to()-detail">yii\helpers\Url::to()</a> method is implemented by calling the <a href="../../../api/2.0/yii-web-urlmanager.html#createUrl()-detail">createUrl()</a>
+and <a href="../../../api/2.0/yii-web-urlmanager.html#createAbsoluteUrl()-detail">createAbsoluteUrl()</a> methods of the <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a>.
+In the next few subsections, we will explain how to configure the <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a> to customize
+the format of the created URLs.</p>
+<p>The <a href="../../../api/2.0/yii-helpers-baseurl.html#to()-detail">yii\helpers\Url::to()</a> method also supports creating URLs that are <strong>not</strong> related with particular routes.
+Instead of passing an array as its first parameter, you should pass a string in this case. For example,</p>
+<pre><code class="hljs php language-php"><span class="hljs-keyword">use</span> <span class="hljs-title">yii</span>\<span class="hljs-title">helpers</span>\<span class="hljs-title">Url</span>;
+
+<span class="hljs-comment">// currently requested URL: /index.php?r=admin%2Fpost%2Findex</span>
+<span class="hljs-keyword">echo</span> Url::to();
+
+<span class="hljs-comment">// an aliased URL: https://example.com</span>
+Yii::setAlias(<span class="hljs-string">'@example'</span>, <span class="hljs-string">'https://example.com/'</span>);
+<span class="hljs-keyword">echo</span> Url::to(<span class="hljs-string">'@example'</span>);
+
+<span class="hljs-comment">// an absolute URL: https://example.com/images/logo.gif</span>
+<span class="hljs-keyword">echo</span> Url::to(<span class="hljs-string">'/images/logo.gif'</span>, <span class="hljs-keyword">true</span>);
+</code></pre>
+<p>Besides the <code>to()</code> method, the <a href="../../../api/2.0/yii-helpers-url.html">yii\helpers\Url</a> helper class also provides several other convenient URL creation
+methods. For example,</p>
+<pre><code class="hljs php language-php">
+<span class="hljs-keyword">use</span> <span class="hljs-title">yii</span>\<span class="hljs-title">helpers</span>\<span class="hljs-title">Url</span>;
+
+<span class="hljs-comment">// home page URL: /index.php?r=site%2Findex</span>
+<span class="hljs-keyword">echo</span> Url::home();
+
+<span class="hljs-comment">// the base URL, useful if the application is deployed in a sub-folder of the Web root</span>
+<span class="hljs-keyword">echo</span> Url::base();
+
+<span class="hljs-comment">// the canonical URL of the currently requested URL</span>
+<span class="hljs-comment">// see https://en.wikipedia.org/wiki/Canonical_link_element</span>
+<span class="hljs-keyword">echo</span> Url::canonical();
+
+<span class="hljs-comment">// remember the currently requested URL and retrieve it back in later requests</span>
+    Url::remember();
+<span class="hljs-keyword">echo</span> Url::previous();
+<span class="hljs-comment">
+    // 'components' => [
+    ' request' => [
+    'cookieValidationKey' => 'randomstring', 'baseUrl'=>'',
+    ],
+</span>
+<span class="hljs-keyword">echo</span> Url::next();
+</code></pre>
+<h2 id="using-pretty-urls">Using Pretty URLs  <a href="#using-pretty-urls" class="hashlink"></a></h2><p>To use pretty URLs, configure the <code>urlManager</code> component in the application configuration like the following:</p>
+<pre><code class="hljs php language-php">[
+       <span class="hljs-string">'urlManager'</span> =&gt; [
+            <span class="hljs-string">'enablePrettyUrl'</span> =&gt; <span class="hljs-keyword">true</span>,
+            <span class="hljs-string">'showScriptName'</span> =&gt; <span class="hljs-keyword">false</span>,
+            <span class="hljs-string">'rules'</span> =&gt; [
+                RewriteEngine On
+                RewriteRule ^(.*)$ web/$1
+            ],
+        ],
+    ],
+]
+</code></pre>
+<p>
+    The <a href="../../../api/2.0/yii-web-urlmanager.html#$enablePrettyUrl-detail">enablePrettyUrl</a> property is mandatory as it toggles the pretty URL format.
+    The rest of the properties are optional. However, their configuration shown above is most commonly used. 
+</p>
+<ul>
+    <li>
+        <a href="../../../api/2.0/yii-web-urlmanager.html#$showScriptName-detail">showScriptName</a>: this property determines whether the entry script
+        should be included in the created URLs. For example, instead of creating a URL <code>/index.php/post/100</code>,
+        by setting this property to be <code>false</code>, a URL <code>/post/100</code> will be generated.
+    </li>
+    <li>
+        <a href="../../../api/2.0/yii-web-urlmanager.html#$enableStrictParsing-detail">enableStrictParsing</a>: this property determines whether to enable
+        strict request parsing. If strict parsing is enabled, the incoming requested URL must match at least one of
+        the <a href="../../../api/2.0/yii-web-urlmanager.html#$rules-detail">rules</a> in order to be treated as a valid request, otherwise a <a href="../../../api/2.0/yii-web-notfoundhttpexception.html">yii\web\NotFoundHttpException</a>
+        will be thrown. If strict parsing is disabled, when none of the <a href="../../../api/2.0/yii-web-urlmanager.html#$rules-detail">rules</a> matches
+        the requested URL, the path info part of the URL will be treated as the requested route.
+    </li>
+    <li>
+        <a href="../../../api/2.0/yii-web-urlmanager.html#$rules-detail">rules</a>: Copy the .htaccess file from the web directory to the root directory of the
+        module
+    </li>
+    <li>
+        <a href="../../../api/2.0/yii-web-urlmanager.html#$rules-detail">chpu</a>:
+        In the web.php file on lines forty-eight -- fifty-three. The code block above should be copied into web.php on lines fourteen -- nineteen.
+    </li>
+    <li>
+        <a href="../../../api/2.0/yii-web-urlmanager.html#$rules-detail">localization</a>:
+        Also in the web.php file it is required to add a line to $config = 'language' = 'ru-RU',
+    </li>
+</ul>
+<blockquote class="note"><p><strong>Note: </strong>In order to hide the entry script name in the created URLs, besides setting
+  <a href="../../../api/2.0/yii-web-urlmanager.html#$showScriptName-detail">showScriptName</a> to be <code>false</code>, you may also need to configure your Web server
+  so that it can correctly identify which PHP script should be executed when a requested URL does not explicitly
+  specify one. If you are using Apache or nginx Web server, you may refer to the recommended configuration as described in the
+  <a href="start-installation.html#recommended-apache-configuration">Installation</a> section.</p>
+</blockquote>
+<h3 id="url-rules">URL Rules  <a href="#url-rules" class="hashlink"></a></h3><p>A URL rule is a class implementing the <a href="../../../api/2.0/yii-web-urlruleinterface.html">yii\web\UrlRuleInterface</a>, usually <a href="../../../api/2.0/yii-web-urlrule.html">yii\web\UrlRule</a>. Each URL rule consists of a pattern used
+for matching the path info part of URLs, a route, and a few query parameters. A URL rule can be used to parse a request
+if its pattern matches the requested URL. A URL rule can be used to create a URL if its route and query parameter
+names match those that are given.</p>
+<p>When the pretty URL format is enabled, the <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a> uses the URL rules declared in its
+<a href="../../../api/2.0/yii-web-urlmanager.html#$rules-detail">rules</a> property to parse incoming requests and create URLs. In particular,
+to parse an incoming request, the <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a> examines the rules in the order they are
+declared and looks for the <em>first</em> rule that matches the requested URL. The matching rule is then used to
+parse the URL into a route and its associated parameters. Similarly, to create a URL, the <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a>
+looks for the first rule that matches the given route and parameters and uses that to create a URL.</p>
+<p>You can configure <a href="../../../api/2.0/yii-web-urlmanager.html#$rules-detail">yii\web\UrlManager::$rules</a> as an array with keys being the <a href="../../../api/2.0/yii-web-urlrule.html#$pattern-detail">patterns</a> and values the corresponding
+<a href="../../../api/2.0/yii-web-urlrule.html#$route-detail">routes</a>. Each pattern-route pair constructs a URL rule. For example, the following <a href="../../../api/2.0/yii-web-urlmanager.html#$rules-detail">rules</a>
+configuration declares two URL rules. The first rule matches a URL <code>posts</code> and maps it into the route <code>post/index</code>.
+The second rule matches a URL matching the regular expression <code>post/(\d+)</code> and maps it into the route <code>post/view</code> and
+defines a query parameter named <code>id</code>.</p>
+<pre><code class="hljs php language-php"><span class="hljs-string">'rules'</span> =&gt; [
+    <span class="hljs-string">'posts'</span> =&gt; <span class="hljs-string">'post/index'</span>,
+    <span class="hljs-string">'post/&lt;id:\d+&gt;'</span> =&gt; <span class="hljs-string">'post/view'</span>,
+]
+</code></pre>
+<blockquote class="info"><p><strong>Info: </strong>The pattern in a rule is used to match the path info part of a URL. For example, the path info of
+  <code>/index.php/post/100?source=ad</code> is <code>post/100</code> (the leading and ending slashes are ignored) which matches
+  the pattern <code>post/(\d+)</code>.</p>
+</blockquote>
+<p>Besides declaring URL rules as pattern-route pairs, you may also declare them as configuration arrays. Each configuration
+array is used to configure a single URL rule object. This is often needed when you want to configure other
+properties of a URL rule. For example,</p>
+<pre><code class="hljs php language-php"><span class="hljs-string">'rules'</span> =&gt; [
+    <span class="hljs-comment">// ...other url rules...</span>
+    [
+        <span class="hljs-string">'pattern'</span> =&gt; <span class="hljs-string">'posts'</span>,
+        <span class="hljs-string">'route'</span> =&gt; <span class="hljs-string">'post/index'</span>,
+        <span class="hljs-string">'suffix'</span> =&gt; <span class="hljs-string">'.json'</span>,
+    ],
+]
+</code></pre>
+<p>By default if you do not specify the <code>class</code> option for a rule configuration, it will take the default
+class <a href="../../../api/2.0/yii-web-urlrule.html">yii\web\UrlRule</a>, which is the default value defined in
+<a href="../../../api/2.0/yii-web-urlmanager.html#$ruleConfig-detail">yii\web\UrlManager::$ruleConfig</a>.</p>
+<h3 id="named-parameters">Named Parameters  <a href="#named-parameters" class="hashlink"></a></h3><p>A URL rule can be associated with named query parameters which are specified in the pattern in the format
+of <code>&lt;ParamName:RegExp&gt;</code>, where <code>ParamName</code> specifies the parameter name and <code>RegExp</code> is an optional regular
+expression used to match parameter values. If <code>RegExp</code> is not specified, it means the parameter value should be
+a string without any slash.</p>
+<blockquote class="note"><p><strong>Note: </strong>You can only use regular expressions inside of parameters. The rest of a pattern is considered plain text.</p>
+</blockquote>
+<p>When a rule is used to parse a URL, it will fill the associated parameters with values matching the corresponding
+parts of the URL, and these parameters will be made available in <code>$_GET</code> later by the <code>request</code> application component.
+When the rule is used to create a URL, it will take the values of the provided parameters and insert them at the
+places where the parameters are declared.</p>
+<p>Let's use some examples to illustrate how named parameters work. Assume we have declared the following three URL rules:</p>
+<pre><code class="hljs php language-php"><span class="hljs-string">'rules'</span> =&gt; [
+    <span class="hljs-string">'posts/&lt;year:\d{4}&gt;/&lt;category&gt;'</span> =&gt; <span class="hljs-string">'post/index'</span>,
+    <span class="hljs-string">'posts'</span> =&gt; <span class="hljs-string">'post/index'</span>,
+    <span class="hljs-string">'post/&lt;id:\d+&gt;'</span> =&gt; <span class="hljs-string">'post/view'</span>,
+]
+</code></pre>
+<p>When the rules are used to parse URLs:</p>
+<ul>
+<li><code>/index.php/posts</code> is parsed into the route <code>post/index</code> using the second rule;</li>
+<li><code>/index.php/posts/2014/php</code> is parsed into the route <code>post/index</code>, the <code>year</code> parameter whose value is 2014
+and the <code>category</code> parameter whose value is <code>php</code> using the first rule;</li>
+<li><code>/index.php/post/100</code> is parsed into the route <code>post/view</code> and the <code>id</code> parameter whose value is 100 using
+the third rule;</li>
+<li><code>/index.php/posts/php</code> will cause a <a href="../../../api/2.0/yii-web-notfoundhttpexception.html">yii\web\NotFoundHttpException</a> when <a href="../../../api/2.0/yii-web-urlmanager.html#$enableStrictParsing-detail">yii\web\UrlManager::$enableStrictParsing</a>
+is <code>true</code>, because it matches none of the patterns. If <a href="../../../api/2.0/yii-web-urlmanager.html#$enableStrictParsing-detail">yii\web\UrlManager::$enableStrictParsing</a> is <code>false</code> (the
+default value), the path info part <code>posts/php</code> will be returned as the route. This will either execute the corresponding action if it exists or throw a <a href="../../../api/2.0/yii-web-notfoundhttpexception.html">yii\web\NotFoundHttpException</a> otherwise.</li>
+</ul>
+<p>And when the rules are used to create URLs:</p>
+<ul>
+<li><code>Url::to(['post/index'])</code> creates <code>/index.php/posts</code> using the second rule;</li>
+<li><code>Url::to(['post/index', 'year' =&gt; 2014, 'category' =&gt; 'php'])</code> creates <code>/index.php/posts/2014/php</code> using the first rule;</li>
+<li><code>Url::to(['post/view', 'id' =&gt; 100])</code> creates <code>/index.php/post/100</code> using the third rule;</li>
+<li><code>Url::to(['post/view', 'id' =&gt; 100, 'source' =&gt; 'ad'])</code> creates <code>/index.php/post/100?source=ad</code> using the third rule.
+Because the <code>source</code> parameter is not specified in the rule, it is appended as a query parameter in the created URL.</li>
+<li><code>Url::to(['post/index', 'category' =&gt; 'php'])</code> creates <code>/index.php/post/index?category=php</code> using none of the rules.
+Note that since none of the rules applies, the URL is created by simply appending the route as the path info
+and all parameters as the query string part.</li>
+</ul>
+<h3 id="parameterizing-routes">Parameterizing Routes  <a href="#parameterizing-routes" class="hashlink"></a></h3><p>You can embed parameter names in the route of a URL rule. This allows a URL rule to be used for matching multiple
+routes. For example, the following rules embed <code>controller</code> and <code>action</code> parameters in the routes.</p>
+<pre><code class="hljs php language-php"><span class="hljs-string">'rules'</span> =&gt; [
+    <span class="hljs-string">'&lt;controller:(post|comment)&gt;/create'</span> =&gt; <span class="hljs-string">'&lt;controller&gt;/create'</span>,
+    <span class="hljs-string">'&lt;controller:(post|comment)&gt;/&lt;id:\d+&gt;/&lt;action:(update|delete)&gt;'</span> =&gt; <span class="hljs-string">'&lt;controller&gt;/&lt;action&gt;'</span>,
+    <span class="hljs-string">'&lt;controller:(post|comment)&gt;/&lt;id:\d+&gt;'</span> =&gt; <span class="hljs-string">'&lt;controller&gt;/view'</span>,
+    <span class="hljs-string">'&lt;controller:(post|comment)&gt;s'</span> =&gt; <span class="hljs-string">'&lt;controller&gt;/index'</span>,
+]
+</code></pre>
+<p>To parse a URL <code>/index.php/comment/100/update</code>, the second rule will apply, which sets the <code>controller</code> parameter to
+be <code>comment</code> and <code>action</code> parameter to be <code>update</code>. The route <code>&lt;controller&gt;/&lt;action&gt;</code> is thus resolved as <code>comment/update</code>.</p>
+<p>Similarly, to create a URL for the route <code>comment/index</code>, the last rule will apply, which creates a URL <code>/index.php/comments</code>.</p>
+<blockquote class="info"><p><strong>Info: </strong>By parameterizing routes, it is possible to greatly reduce the number of URL rules, which can significantly
+  improve the performance of <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a>.</p>
+</blockquote>
+<h3 id="default-parameter-values">Default Parameter Values  <a href="#default-parameter-values" class="hashlink"></a></h3><p>By default, all parameters declared in a rule are required. If a requested URL does not contain a particular parameter,
+or if a URL is being created without a particular parameter, the rule will not apply. To make some of the parameters
+optional, you can configure the <a href="../../../api/2.0/yii-web-urlrule.html#$defaults-detail">defaults</a> property of a rule. Parameters listed in this
+property are optional and will take the specified values when they are not provided.</p>
+<p>In the following rule declaration, the <code>page</code> and <code>tag</code> parameters are both optional and will take the value of 1 and
+empty string, respectively, when they are not provided.</p>
+<pre><code class="hljs php language-php"><span class="hljs-string">'rules'</span> =&gt; [
+    <span class="hljs-comment">// ...other rules...</span>
+    [
+        <span class="hljs-string">'pattern'</span> =&gt; <span class="hljs-string">'posts/&lt;page:\d+&gt;/&lt;tag&gt;'</span>,
+        <span class="hljs-string">'route'</span> =&gt; <span class="hljs-string">'post/index'</span>,
+        <span class="hljs-string">'defaults'</span> =&gt; [<span class="hljs-string">'page'</span> =&gt; <span class="hljs-number">1</span>, <span class="hljs-string">'tag'</span> =&gt; <span class="hljs-string">''</span>],
+    ],
+]
+</code></pre>
+<p>The above rule can be used to parse or create any of the following URLs:</p>
+<ul>
+<li><code>/index.php/posts</code>: <code>page</code> is 1, <code>tag</code> is ''.</li>
+<li><code>/index.php/posts/2</code>: <code>page</code> is 2, <code>tag</code> is ''.</li>
+<li><code>/index.php/posts/2/news</code>: <code>page</code> is 2, <code>tag</code> is <code>'news'</code>.</li>
+<li><code>/index.php/posts/news</code>: <code>page</code> is 1, <code>tag</code> is <code>'news'</code>.</li>
+</ul>
+<p>Without using optional parameters, you would have to create 4 rules to achieve the same result.</p>
+<blockquote class="note"><p><strong>Note: </strong>If <a href="../../../api/2.0/yii-web-urlrule.html#$pattern-detail">pattern</a> contains only optional parameters and slashes, first parameter could be omitted 
+  only if all other parameters are omitted.</p>
+</blockquote>
+<h3 id="rules-with-server-names">Rules with Server Names  <a href="#rules-with-server-names" class="hashlink"></a></h3><p>It is possible to include Web server names in the patterns of URL rules. This is mainly useful when your application
+should behave differently for different Web server names. For example, the following rules will parse the URL
+<code>https://admin.example.com/login</code> into the route <code>admin/user/login</code> and <code>https://www.example.com/login</code> into <code>site/login</code>.</p>
+<pre><code class="hljs php language-php"><span class="hljs-string">'rules'</span> =&gt; [
+    <span class="hljs-string">'https://admin.example.com/login'</span> =&gt; <span class="hljs-string">'admin/user/login'</span>,
+    <span class="hljs-string">'https://www.example.com/login'</span> =&gt; <span class="hljs-string">'site/login'</span>,
+]
+</code></pre>
+<p>You can also embed parameters in the server names to extract dynamic information from them. For example, the following rule
+will parse the URL <code>https://en.example.com/posts</code> into the route <code>post/index</code> and the parameter <code>language=en</code>.</p>
+<pre><code class="hljs php language-php"><span class="hljs-string">'rules'</span> =&gt; [
+    <span class="hljs-string">'https://&lt;language:\w+&gt;.example.com/posts'</span> =&gt; <span class="hljs-string">'post/index'</span>,
+]
+</code></pre>
+<p>Since version 2.0.11, you may also use protocol relative patterns that work for both, <code>http</code> and <code>https</code>.
+The syntax is the same as above but skipping the <code>http:</code> part, e.g.: <code>'//www.example.com/login' =&gt; 'site/login'</code>.</p>
+<blockquote class="note"><p><strong>Note: </strong>Rules with server names should <strong>not</strong> include the subfolder of the entry script in their patterns. For example, if the applications entry script is at <code>https://www.example.com/sandbox/blog/index.php</code>, then you should use the pattern
+  <code>https://www.example.com/posts</code> instead of <code>https://www.example.com/sandbox/blog/posts</code>. This will allow your application
+  to be deployed under any directory without the need to change your url rules. Yii will automatically detect the base url of the application.</p>
+</blockquote>
+<h3 id="url-suffixes">URL Suffixes  <a href="#url-suffixes" class="hashlink"></a></h3><p>You may want to add suffixes to the URLs for various purposes. For example, you may add <code>.html</code> to the URLs so that they
+look like URLs for static HTML pages; you may also add <code>.json</code> to the URLs to indicate the expected content type
+of the response. You can achieve this goal by configuring the <a href="../../../api/2.0/yii-web-urlmanager.html#$suffix-detail">yii\web\UrlManager::$suffix</a> property like
+the following in the application configuration:</p>
+<pre><code class="hljs php language-php">[
+    <span class="hljs-comment">// ...</span>
+    <span class="hljs-string">'components'</span> =&gt; [
+        <span class="hljs-string">'urlManager'</span> =&gt; [
+            <span class="hljs-string">'enablePrettyUrl'</span> =&gt; <span class="hljs-keyword">true</span>,
+            <span class="hljs-comment">// ...</span>
+            <span class="hljs-string">'suffix'</span> =&gt; <span class="hljs-string">'.html'</span>,
+            <span class="hljs-string">'rules'</span> =&gt; [
+                <span class="hljs-comment">// ...</span>
+            ],
+        ],
+    ],
+]
+</code></pre>
+<p>The above configuration will allow the <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a> to recognize requested URLs and also create
+URLs with <code>.html</code> as their suffix.</p>
+<blockquote class="tip"><p><strong>Tip: </strong>You may set <code>/</code> as the URL suffix so that the URLs all end with a slash.</p>
+</blockquote>
+<blockquote class="note"><p><strong>Note: </strong>When you configure a URL suffix, if a requested URL does not have the suffix, it will be considered as
+  an unrecognized URL. This is a recommended practice for SEO (search engine optimization) to avoid duplicate content on different URLs.</p>
+</blockquote>
+<p>Sometimes you may want to use different suffixes for different URLs. This can be achieved by configuring the
+<a href="../../../api/2.0/yii-web-urlrule.html#$suffix-detail">suffix</a> property of individual URL rules. When a URL rule has this property set, it will
+override the suffix setting at the <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a> level. For example, the following configuration
+contains a customized URL rule which uses <code>.json</code> as its suffix instead of the global <code>.html</code> suffix.</p>
+<pre><code class="hljs php language-php">[
+    <span class="hljs-string">'components'</span> =&gt; [
+        <span class="hljs-string">'urlManager'</span> =&gt; [
+            <span class="hljs-string">'enablePrettyUrl'</span> =&gt; <span class="hljs-keyword">true</span>,
+            <span class="hljs-comment">// ...</span>
+            <span class="hljs-string">'suffix'</span> =&gt; <span class="hljs-string">'.html'</span>,
+            <span class="hljs-string">'rules'</span> =&gt; [
+                <span class="hljs-comment">// ...</span>
+                [
+                    <span class="hljs-string">'pattern'</span> =&gt; <span class="hljs-string">'posts'</span>,
+                    <span class="hljs-string">'route'</span> =&gt; <span class="hljs-string">'post/index'</span>,
+                    <span class="hljs-string">'suffix'</span> =&gt; <span class="hljs-string">'.json'</span>,
+                ],
+            ],
+        ],
+    ],
+]
+</code></pre>
+<h3 id="http-methods">HTTP Methods  <a href="#http-methods" class="hashlink"></a></h3><p>When implementing RESTful APIs, it is commonly needed that the same URL be parsed into different routes according to
+the HTTP methods being used. This can be easily achieved by prefixing the supported HTTP methods to the patterns of
+the rules. If a rule supports multiple HTTP methods, separate the method names with commas. For example, the following
+rules have the same pattern <code>post/&lt;id:\d+&gt;</code> with different HTTP method support. A request for <code>PUT post/100</code> will
+be parsed into <code>post/update</code>, while a request for <code>GET post/100</code> will be parsed into <code>post/view</code>.</p>
+<pre><code class="hljs php language-php"><span class="hljs-string">'rules'</span> =&gt; [
+    <span class="hljs-string">'PUT,POST post/&lt;id:\d+&gt;'</span> =&gt; <span class="hljs-string">'post/update'</span>,
+    <span class="hljs-string">'DELETE post/&lt;id:\d+&gt;'</span> =&gt; <span class="hljs-string">'post/delete'</span>,
+    <span class="hljs-string">'post/&lt;id:\d+&gt;'</span> =&gt; <span class="hljs-string">'post/view'</span>,
+]
+</code></pre>
+<blockquote class="note"><p><strong>Note: </strong>If a URL rule contains HTTP method(s) in its pattern, the rule will only be used for parsing purpose unless <code>GET</code> is among the specified verbs.
+  It will be skipped when the <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a> is called to create URLs.</p>
+</blockquote>
+<blockquote class="tip"><p><strong>Tip: </strong>To simplify the routing of RESTful APIs, Yii provides a special URL rule class <a href="../../../api/2.0/yii-rest-urlrule.html">yii\rest\UrlRule</a>
+  which is very efficient and supports some fancy features such as automatic pluralization of controller IDs.
+  For more details, please refer to the <a href="rest-routing.html">Routing</a> section in the RESTful APIs chapter.</p>
+</blockquote>
+<h3 id="adding-rules">Adding Rules Dynamically  <a href="#adding-rules" class="hashlink"></a></h3><p>URL rules can be dynamically added to the <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a>. This is often needed by redistributable
+<a href="structure-modules.html">modules</a> which want to manage their own URL rules. In order for the dynamically added rules
+to take effect during the routing process, you should add them during the <a href="runtime-bootstrapping.html">bootstrapping</a>
+stage of the application. For modules, this means they should implement <a href="../../../api/2.0/yii-base-bootstrapinterface.html">yii\base\BootstrapInterface</a> and add the rules in the
+<a href="../../../api/2.0/yii-base-bootstrapinterface.html#bootstrap()-detail">bootstrap()</a> method like the following:</p>
+<pre><code class="hljs php language-php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bootstrap</span><span class="hljs-params">($app)</span>
+</span>{
+    $app-&gt;getUrlManager()-&gt;addRules([
+        <span class="hljs-comment">// rule declarations here</span>
+    ], <span class="hljs-keyword">false</span>);
+}
+</code></pre>
+<p>Note that you should also list these modules in <a href="../../../api/2.0/yii-web-application.html#bootstrap()-detail">yii\web\Application::bootstrap()</a> so that they can participate the
+<a href="runtime-bootstrapping.html">bootstrapping</a> process.</p>
+<h3 id="creating-rules">Creating Rule Classes  <a href="#creating-rules" class="hashlink"></a></h3><p>Despite the fact that the default <a href="../../../api/2.0/yii-web-urlrule.html">yii\web\UrlRule</a> class is flexible enough for the majority of projects, there
+are situations when you have to create your own rule classes. For example, in a car dealer Web site, you may want
+to support the URL format like <code>/Manufacturer/Model</code>, where both <code>Manufacturer</code> and <code>Model</code> must match some data
+stored in a database table. The default rule class will not work here because it relies on statically declared patterns.</p>
+<p>We can create the following URL rule class to solve this problem.</p>
+<pre><code class="hljs php language-php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">app</span>\<span class="hljs-title">components</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">yii</span>\<span class="hljs-title">web</span>\<span class="hljs-title">UrlRuleInterface</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">yii</span>\<span class="hljs-title">base</span>\<span class="hljs-title">BaseObject</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CarUrlRule</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BaseObject</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">UrlRuleInterface</span>
+</span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createUrl</span><span class="hljs-params">($manager, $route, $params)</span>
+    </span>{
+        <span class="hljs-keyword">if</span> ($route === <span class="hljs-string">'car/index'</span>) {
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>($params[<span class="hljs-string">'manufacturer'</span>], $params[<span class="hljs-string">'model'</span>])) {
+                <span class="hljs-keyword">return</span> $params[<span class="hljs-string">'manufacturer'</span>] . <span class="hljs-string">'/'</span> . $params[<span class="hljs-string">'model'</span>];
+            } <span class="hljs-keyword">elseif</span> (<span class="hljs-keyword">isset</span>($params[<span class="hljs-string">'manufacturer'</span>])) {
+                <span class="hljs-keyword">return</span> $params[<span class="hljs-string">'manufacturer'</span>];
+            }
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>; <span class="hljs-comment">// this rule does not apply</span>
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parseRequest</span><span class="hljs-params">($manager, $request)</span>
+    </span>{
+        $pathInfo = $request-&gt;getPathInfo();
+        <span class="hljs-keyword">if</span> (preg_match(<span class="hljs-string">'%^(\w+)(/(\w+))?$%'</span>, $pathInfo, $matches)) {
+            <span class="hljs-comment">// check $matches[1] and $matches[3] to see</span>
+            <span class="hljs-comment">// if they match a manufacturer and a model in the database.</span>
+            <span class="hljs-comment">// If so, set $params['manufacturer'] and/or $params['model']</span>
+            <span class="hljs-comment">// and return ['car/index', $params]</span>
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>; <span class="hljs-comment">// this rule does not apply</span>
+    }
+}
+</code></pre>
+<p>And use the new rule class in the <a href="../../../api/2.0/yii-web-urlmanager.html#$rules-detail">yii\web\UrlManager::$rules</a> configuration:</p>
+<pre><code class="hljs php language-php"><span class="hljs-string">'rules'</span> =&gt; [
+    <span class="hljs-comment">// ...other rules...</span>
+    [
+        <span class="hljs-string">'class'</span> =&gt; <span class="hljs-string">'app\components\CarUrlRule'</span>,
+        <span class="hljs-comment">// ...configure other properties...</span>
+    ],
+]
+</code></pre>
+<h2 id="url-normalization">URL normalization  <a href="#url-normalization" class="hashlink"></a></h2><p>Since version 2.0.10 <a href="../../../api/2.0/yii-web-urlmanager.html">User.php</a> can be configured to use <a href="../../../api/2.0/yii-web-urlnormalizer.html">UrlNormalizer</a> for dealing
+with variations of the same URL, for example with and without a trailing slash. Because technically <code>https://example.com/path</code>
+and <code>https://example.com/path/</code> are different URLs, serving the same content for both of them can degrade SEO ranking.
+By default normalizer collapses consecutive slashes, adds or removes trailing slashes depending on whether the
+suffix has a trailing slash or not, and redirects believe on php to the normalized version of the URL using <a href="https://en.wikipedia.org/wiki/HTTP_301">permanent redirection</a>.
+The normalizer can be configured globally php for the URL manager or individually for each rule - by default each rule will use the normalizer
+from URL manager. You can set php <a href="../../../api/2.0/yii-web-urlrule.html#$normalizer-detail">UrlRule::$php</a> to <code>false</code> to disable normalization
+for particular URL rule.</p>
+<p>The following shows an example configuration for php the <a href="../../../api/2.0/yii-web-urlnormalizer.html">UrlNormalizer</a>:</p>
+<pre><code class="hljs php language-php">
+    namespace <span class="hljs-title">app\models</span>;
+
+use <span class="hljs-title">Yii</span>;
+use <span class="hljs-title">\yii\web\IdentityInterface</span>;
+use <span class="hljs-title">\yii\db\ActiveRecord</span>;
+
+<span class="hljs-comment">/**
+ * This is the model class for table "user".
+ *
+ * @property int $id
+ * @property int $role_id
+ * @property string $username
+ * @property string $password
+ * @property string $email
+ * @property string $full_name
+ * @property string $phone
+ *
+ * @property Request[] $requests
+ * @property Role $role
+ */</span>
+class User extends <span class="hljs-keyword">ActiveRecord</span> implements <span class="hljs-keyword">IdentityInterface</span>
+{
+    <span class="hljs-comment">/**
+     * {@inheritdoc}
+     */</span>
+    public static function <span class="hljs-keyword">tableName</span>()
+    {
+        <span class="hljs-keyword">return</span> 'user';
+    }
+    <span class="hljs-comment">/**
+     * {@inheritdoc}
+     */</span>
+    public function <span class="hljs-keyword">rules</span>()
+    {
+        <span class="hljs-keyword">return</span> [
+            [[ <span class="hljs-string">'username'</span>, <span class="hljs-string">'password'</span>, <span class="hljs-string">'email'</span>, <span class="hljs-string">'full_name'</span>, <span class="hljs-string">'phone'</span>], <span class="hljs-string">'required'</span>],
+            [[<span class="hljs-string">'role_id'</span>], <span class="hljs-string">'integer'</span>],
+            [[<span class="hljs-string">'username'</span>, <span class="hljs-string">'password'</span>, <span class="hljs-string">'email'</span>, <span class="hljs-string">'full_name'</span>, <span class="hljs-string">'phone'</span>], <span class="hljs-string">'string'</span>, <span class="hljs-string">'max'</span> => <span class="hljs-number">255</span>],
+            [[<span class="hljs-string">'password'</span>], <span class="hljs-string">'string'</span>, <span class="hljs-string">'min'</span> => <span class="hljs-number">6</span>],
+            [[<span class="hljs-string">'full_name'</span>], <span class="hljs-string">'match'</span>, <span class="hljs-string">'pattern'</span> => <span class="hljs-string">'/^[а-яА-Я ]*$/u'</span>],
+            [[<span class="hljs-string">'phone'</span>], <span class="hljs-string">'match'</span>, <span class="hljs-string">'pattern'</span> => <span class="hljs-string">'/^\+?7\(\d{3}\)-\d{3}-\d{2}-\d{2}$/'</span>],
+            [[<span class="hljs-string">'username'</span>], <span class="hljs-string">'unique'</span>],
+            [[<span class="hljs-string">'email'</span>], <span class="hljs-string">'unique'</span>],
+            [[<span class="hljs-string">'email'</span>], <span class="hljs-string">'email'</span>],
+            [[<span class="hljs-string">'role_id'</span>], <span class="hljs-string">'exist'</span>, <span class="hljs-string">'skipOnError'</span> => true, <span class="hljs-string">'targetClass'</span> => Role::class, <span class="hljs-string">'targetAttribute'</span> => [<span class="hljs-string">'role_id'</span> => <span class="hljs-string">'id'</span>]],
+            [<span class="hljs-string">'role_id'</span>, <span class="hljs-string">'default'</span>, <span class="hljs-string">'value'</span> => <span class="hljs-number">1</span>],
+            
+        ];
+    }
+
+    /**<span class="hljs-comment">
+     * {@inheritdoc}
+     */</span>
+    public function <span class="hljs-keyword">attributeLabels</span>()
+    {
+        <span class="hljs-keyword">return</span> [
+            <span class="hljs-string">'id'</span> => <span class="hljs-string">'ID'</span>,
+            <span class="hljs-string">'role_id'</span> => <span class="hljs-string">'Role ID'</span>,
+            <span class="hljs-string">'username'</span> => <span class="hljs-string">'Имя пользователя'</span>,
+            <span class="hljs-string">'password'</span> => <span class="hljs-string">'Пароль'</span>,
+            <span class="hljs-string">'email'</span> => <span class="hljs-string">'Почта'</span>,
+            <span class="hljs-string">'first_name'</span> => <span class="hljs-string">'Имя'</span>,
+            <span class="hljs-string">'last_name'</span> => <span class="hljs-string">'Фамилия'</span>,
+            <span class="hljs-string">'middle_name'</span> => <span class="hljs-string">'Отчество'</span>,
+            <span class="hljs-string">'full_name'</span> => <span class="hljs-string">'Ф.И.О.'</span>,
+            <span class="hljs-string">'phone'</span> => <span class="hljs-string">'Номер телефона'</span>,
+            <span class="hljs-string">'bday'</span> => <span class="hljs-string">'Дата рождения'</span>,
+        ];
+    }
+
+    public function <span class="hljs-keyword">beforeSave</span>($insert)
+    {
+        $this->password = md5($this->password);
+        <span class="hljs-keyword">return</span> parent::beforeSave($insert);
+    }
+    <span class="hljs-comment">/**
+     * Gets query for [[Requests]].
+     *
+     * @return \yii\db\ActiveQuery
+     */</span>
+    public function <span class="hljs-keyword">getRequests</span>()
+    {
+         <span class="hljs-keyword">return</span> $this->hasMany(Request::class, [<span class="hljs-string">'user_id'</span> => <span class="hljs-string">'id'</span>]);
+    }
+
+    <span class="hljs-comment">/**
+     * Gets query for [[Role]].
+     *
+     * @return \yii\db\ActiveQuery
+     */</span>
+    public function <span class="hljs-keyword">getRole</span>()
+    {
+        return $this->hasOne(Role::class, [<span class="hljs-string">'id'</span> => <span class="hljs-string">'role_id'</span>]);
+    }
+    public static function <span class="hljs-keyword">findIdentity</span>($id)
+    {
+        <span class="hljs-keyword">return</span> static::findOne($id);
+    }
+
+    <span class="hljs-comment">/**
+     * {@inheritdoc}
+     */</span>
+    public static function <span class="hljs-keyword">findIdentityByAccessToken</span>($token, $type = null)
+    {
+        <span class="hljs-keyword">return</span> null;
+    }
+
+    <span class="hljs-comment">/**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return static|null
+     */</span>
+    public static function <span class="hljs-keyword">findByUsername</span>($username)
+    {
+        
+
+        <span class="hljs-keyword">return</span> User::findOne(['username' => $username]);;
+    }
+
+    <span class="hljs-comment">/**
+     * {@inheritdoc}
+     */</span>
+    public function <span class="hljs-keyword">getId</span>()
+    {
+        <span class="hljs-keyword">return</span> $this->id;
+    }
+
+    <span class="hljs-comment">/**
+     * {@inheritdoc}
+     */</span>
+    public function <span class="hljs-keyword">getAuthKey</span>()
+    {
+        <span class="hljs-keyword">return</span> null;
+    }
+
+    <span class="hljs-comment">/**
+     * {@inheritdoc}
+     */</span>
+    public function <span class="hljs-keyword">validateAuthKey</span>($authKey)
+    {
+        <span class="hljs-keyword">return</span> false;
+    }
+
+    <span class="hljs-comment">/**
+     * Validates password
+     *
+     * @param string $password password to validate
+     * @return bool if password provided is valid for current user
+     */</span>
+    public function <span class="hljs-keyword">validatePassword</span>($password)
+    {
+        <span class="hljs-keyword">return</span> $this->password === md5($password);
+    }
+    public function <span class="hljs-keyword">validateAdmin</span>()
+    {
+        <span class="hljs-keyword">return</span> $this->role->code === <span class="hljs-string">'admin'</span>;
+    }
+}
+</span>
+</code></pre>
+<blockquote class="note"><p><strong>Note: </strong>by default <a href="../../../api/2.0/yii-web-urlmanager.html#$normalizer-detail">UrlManager::$normalizer</a> is disabled. You need to explicitly
+  configure it in order to enable URL normalization.</p>
+</blockquote>
+<h2 id="performance-consideration">Performance Considerations  <a href="#performance-consideration" class="hashlink"></a></h2><p>When developing a complex Web application, it is important to optimize URL rules so that it takes less time to parse
+requests and create URLs.</p>
+<p>By using parameterized routes, you may reduce the number of URL rules, which can significantly improve performance.</p>
+<p>When parsing or creating URLs, <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a> examines URL rules in the order they are declared.
+Therefore, you may consider adjusting the order of the URL rules so that more specific and/or more commonly used rules are placed before less used ones.</p>
+<p>If some URL rules share the same prefix in their patterns or routes, you may consider using <a href="../../../api/2.0/yii-web-groupurlrule.html">yii\web\GroupUrlRule</a>
+so that they can be more efficiently examined by <a href="../../../api/2.0/yii-web-urlmanager.html">URL manager</a> as a group. This is often the case
+when your application is composed by modules, each having its own set of URL rules with module ID as their common prefixes.</p>
+
+    <div class="prev-next">
+        <div class="prev-next__left"><a href="runtime-bootstrapping.html"><span class="chevron-left" aria-hidden="true"></span> Bootstrapping</a></div><div class="prev-next__center"><a href="#top">Go to Top <span class="chevron-up" aria-hidden="true"></span></a></div><div class="prev-next__right"><a href="runtime-requests.html">Requests <span class="chevron-right" aria-hidden="true"></span></a></div>    </div>
+
+        <div class="edit-box">
+        <div class="edit-icon"><i class="fa fa-github"></i></div>
+        <p class="lang-en">
+            Found a typo or you think this page needs improvement?<br>
+                <a href="https://github.com/yiisoft/yii2/edit/master/docs/guide/runtime-routing.md">Edit it on github</a> !
+        </p>
+    </div>
+    
+</div>
+        </div>
+    </div>
+</div>
+
+    <div class="comments-wrapper">
+        <div class="container comments">
+            
+<div class="row" id="user-notes">
+    <div class="col-md-offset-2 col-md-9">
+                    <span class="heading">User Contributed Notes</span>
+            </div>
+</div>
+<div class="row">
+    <div class="col-md-offset-2 col-md-9">
+        <div class="component-comments lang-en" id="comments">
+                    </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-offset-2 col-md-9">
+        <span class="heading">Leave a comment</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-offset-2 col-md-9">
+                    <p><a href="https://www.yiiframework.com/signup">Signup</a> or <a href="https://www.yiiframework.com/login">Login</a> in order to comment.</p>
+            </div>
+</div>
+        </div>
+    </div>
+
+            <div class="footer-wrapper">
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <div class="row">
+                    <div class="col-md-2 col-sm-4 hidden-xs">
+                        <ul class="footerList">
+  <li class="footerList_item">
+    <div>About</div>
+  </li>
+  <li class="footerList_item">
+    <a href="intro-yii.html">About Yii</a>  </li>
+  <li class="footerList_item">
+    <a href="https://www.yiiframework.com/news">News</a>  </li>
+  <li class="footerList_item">
+    <a href="https://www.yiiframework.com/license">License</a>  </li>
+  <li class="footerList_item">
+    <a href="https://www.yiiframework.com/contact">Contact Us</a>  </li>
+</ul>
+                    </div>
+                    <div class="col-md-2 col-sm-4 hidden-xs">
+                        <ul class="footerList">
+  <li class="footerList_item">
+    <div>Downloads</div>
+  </li>
+  <li class="footerList_item">
+    <a href="https://www.yiiframework.com/download">Framework</a>  </li>
+  <li class="footerList_item">
+    <a href="https://www.yiiframework.com/download#offline-documentation">Documentation</a>  </li>
+  <li class="footerList_item">
+    <a href="https://www.yiiframework.com/extensions">Extensions</a>  </li>
+  <li class="footerList_item">
+    <a href="https://www.yiiframework.com/logo">Logo</a>  </li>
+</ul>
+                    </div>
+                    <div class="col-md-2 col-sm-4 hidden-xs">
+                        <ul class="footerList">
+  <li class="footerList_item">
+    <div>Documentation</div>
+  </li>
+  <li class="footerList_item">
+    <a href="../en.html">Guide</a>  </li>
+  <li class="footerList_item">
+    <a href="../../../api/2.html">API</a>  </li>
+  <li class="footerList_item">
+    <a href="https://www.yiiframework.com/wiki">Wiki</a>  </li>
+  <li class="footerList_item">
+    <a href="https://www.yiiframework.com/resources">Resources</a>  </li>
+</ul>
+                    </div>
+                    <div class="col-md-2 col-sm-4 hidden-xs">
+                        <ul class="footerList">
+  <li class="footerList_item">
+    <div>Development</div>
+  </li>
+  <li class="footerList_item">
+    <a href="https://www.yiiframework.com/contribute">Contribute</a>  </li>
+  <li class="footerList_item">
+    <a href="https://github.com/yiisoft/yii2/commits/master" rel="noopener noreferrer" target="_blank">Latest Updates</a>  </li>
+  <li class="footerList_item">
+    <a href="https://www.yiiframework.com/report-issue">Report a Bug</a>  </li>
+  <li class="footerList_item">
+    <a href="https://www.yiiframework.com/security">Report Security Issue</a>  </li>
+</ul>
+                    </div>
+                    <div class="col-md-2 col-sm-4 hidden-xs">
+                        <ul class="footerList">
+    <li class="footerList_item">
+        <div>Community</div>
+    </li>
+    <li class="footerList_item">
+        <a href="https://www.yiiframework.com/forum">Forum</a>    </li>
+    <li class="footerList_item">
+        <a href="https://www.yiiframework.com/chat">Live Chat</a>    </li>
+    <li class="footerList_item">
+        <a href="https://www.facebook.com/groups/yiitalk/" target="_blank" rel="noopener noreferrer">Facebook Group</a>
+    </li>
+    <li class="footerList_item">
+        <a href="https://www.yiiframework.com/user/halloffame">Hall of Fame</a>    </li>
+    <li class="footerList_item">
+        <a href="https://www.yiiframework.com/badges">Badges</a>    </li>
+</ul>
+                    </div>
+                    <div class="col-md-2 col-sm-4 hidden-xs">
+                        <ul class="footerList">
+  <li class="footerList_item">
+      <span class="social">
+          <a href="https://github.com/yiisoft" aria-label="GitHub Account" target="_blank" rel="noopener noreferrer"><i class="fa fa-github"></i></a>
+          <a href="https://twitter.com/yiiframework" aria-label="Twitter Account" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter"></i></a>
+          <a href="https://www.facebook.com/groups/yiitalk/" aria-label="Facebook Group" target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook"></i></a>
+          <a href="https://www.yiiframework.com/rss.xml" aria-label="RSS Feed"><i class="fa fa-rss"></i></a>      </span>
+  </li>
+  <li class="footerList_item">
+    <a href="https://www.yiiframework.com/tos">Terms of service</a>  </li>
+  <li class="footerList_item">
+      <a href="https://www.yiiframework.com/license">License</a>  </li>
+  <li class="footerList_item">
+      <a href="https://github.com/yiisoft-contrib/yiiframework.com" target="_blank" rel="noopener noreferrer">Website Source Code</a>
+  </li>
+  <li class="footerList_item">
+      &nbsp;
+  </li>
+  <li class="footerList_item">
+    © 2008 - 2024 Yii
+  </li>
+  <li class="footerList_item">
+      Design: <a href="https://www.eshill.ru/" target="_blank" rel="noopener noreferrer">Eshill</a>
+  </li>
+</ul>
+                    </div>
+                    <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+                        <div class="center-block">
+                            <div>
+                                <ul class="footerList">
+  <li class="footerList_item">
+      <span class="social">
+          <a href="https://github.com/yiisoft" aria-label="GitHub Account" target="_blank" rel="noopener noreferrer"><i class="fa fa-github"></i></a>
+          <a href="https://twitter.com/yiiframework" aria-label="Twitter Account" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter"></i></a>
+          <a href="https://www.facebook.com/groups/yiitalk/" aria-label="Facebook Group" target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook"></i></a>
+          <a href="https://www.yiiframework.com/rss.xml" aria-label="RSS Feed"><i class="fa fa-rss"></i></a>      </span>
+  </li>
+  <li class="footerList_item">
+    <a href="https://www.yiiframework.com/tos">Terms of service</a>  </li>
+  <li class="footerList_item">
+      <a href="https://www.yiiframework.com/license">License</a>  </li>
+  <li class="footerList_item">
+      <a href="https://github.com/yiisoft-contrib/yiiframework.com" target="_blank" rel="noopener noreferrer">Website Source Code</a>
+  </li>
+  <li class="footerList_item">
+      &nbsp;
+  </li>
+  <li class="footerList_item">
+    © 2008 - 2024 Yii
+  </li>
+  <li class="footerList_item">
+      Design: <a href="https://www.eshill.ru/" target="_blank" rel="noopener noreferrer">Eshill</a>
+  </li>
+</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 text-center">
+                        <ul class="footerList">
+    <li class="footerList_item">
+        <div>Supported by</div>
+    </li>
+    <li class="footerList_item">
+            <a href="https://opencollective.com/yiisoft" aria-label="OpenCollective" target="_blank" rel="noopener
+            noreferrer"><img alt="OpenCollective" height="40" src="../../../../image/collective.png"></a>
+    </li>
+    <li class="footerList_item">
+        <a href="https://www.jetbrains.com/?from=yii" aria-label="JetBrains website" target="_blank" rel="noopener
+        noreferrer"><img alt="JetBrains logo" width="80" src="../../../../image/jetbrains.svg"></a>
+    </li>
+</ul>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+        </div> <!-- close the id="page-wrapper" -->
+
+        <script src="../../../../assets/968a6cee/js/all.min2f49.js?v=1702740891"></script>
+<script>jQuery(function ($) {
+
+  $('[data-toggle="offcanvas"]').click(function () {
+    $('.row-offcanvas').toggleClass('active')
+  });
+
+});</script>    
+
+
+
+</body><!-- Mirrored from www.yiiframework.com/doc/guide/2.0/en/runtime-routing by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 10 Aug 2024 08:30:41 GMT --></html>

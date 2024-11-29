@@ -1,0 +1,1103 @@
+<html><!-- Mirrored from www.yiiframework.com/doc/guide/2.0/en/db-dao by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 10 Aug 2024 08:31:45 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../favico/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../favico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../favico/favicon-16x16.png">
+    <link rel="icon" type="image/svg+xml" href="../../../../favico/favicon.svg">
+    <link rel="icon" type="image/png" href="../../../../favico/favicon.png">
+    <link rel="shortcut icon" href="../../../../favico/favicon.ico">
+    <link rel="manifest" href="../../../../favico/manifest.json">
+    <link rel="mask-icon" href="../../../../favico/safari-pinned-tab.svg" color="#1e6887">
+    <meta name="msapplication-config" content="https://www.yiiframework.com/favico/browserconfig.xml">
+    <meta name="theme-color" content="#1e6887">
+
+    <link href="https://www.yiiframework.com/rss.xml" type="application/rss+xml" rel="alternate" title="Lives News for Yii Framework">
+
+    <meta name="csrf-param" content="_csrf">
+<meta name="csrf-token" content="31SwPby9gU25DoS5O5Vxs5ERWzNzxPKz43wkrrY1C9eLJ8NPi-rvHdR-9MBB7D7JxiRjXT-glurSNRX971ImnA==">
+    
+    <title>Database Access Objects</title>
+
+    <meta property="og:site_name" content="Yii Framework">
+    <meta property="og:title" content="Working with Databases: Database Access Objects">
+    <meta property="og:image" content="../../../../image/facebook_cover.png">
+    <meta property="og:url" content="/doc/guide/2.0/en/db-dao">
+    <meta property="og:description" content="">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="yiiframework">
+    <meta name="twitter:title" content="Working with Databases: Database Access Objects">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="../../../../image/twitter_cover.png">
+    <meta name="twitter:image:width" content="120">
+    <meta name="twitter:image:height" content="120">
+
+    <link type="application/opensearchdescription+xml" href="https://www.yiiframework.com/opensearch.xml" title="Yii Search" rel="search">
+<link href="../../../../assets/968a6cee/css/all.mina875.css?v=1702740886" rel="stylesheet">
+<script>yiiBaseUrl = ""
+yiiSearchLanguage = "en"
+yiiSearchVersion = "2.0"</script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-707ZP35KCT"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-707ZP35KCT');
+</script>
+</head>
+<body data-spy="scroll" data-target="#scrollnav" data-offset="1">
+    
+    <div id="page-wrapper" class="">
+
+        <header class="navbar navbar-inverse navbar-static" id="top">
+<div class="container">
+    <div id="main-nav-head" class="navbar-header">
+        <a href="https://www.yiiframework.com/" class="navbar-brand">
+            <img src="../../../../image/logo.svg" alt="Yii PHP Framework" width="165" height="35">
+        </a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" aria-label="Toggle navigation" data-target=".navbar-collapse"><i class="fa fa-inverse fa-bars"></i></button>
+    </div>
+
+    <div class="navbar-collapse collapse navbar-right">
+        <ul id="main-nav" class="nav navbar-nav navbar-main-menu nav"><li class="active" title="The Definitive Guide to Yii"><a href="../en.html">Guide</a></li>
+<li title="API Documentation"><a href="../../../api/2.html">API</a></li>
+<li title="Community Wiki"><a href="https://www.yiiframework.com/wiki">Wiki</a></li>
+<li title="Community Forum"><a href="https://www.yiiframework.com/forum">Forum</a></li>
+<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Community <span class="caret"></span></a><ul id="w16" class="dropdown-menu"><li><a href="https://www.yiiframework.com/chat" tabindex="-1">Live Chat</a></li>
+<li title="Extensions"><a href="https://www.yiiframework.com/extensions" tabindex="-1">Extensions</a></li>
+<li><a href="https://www.yiiframework.com/community" tabindex="-1">Resources</a></li>
+<li title="Community Members"><a href="https://www.yiiframework.com/user" tabindex="-1">Members</a></li>
+<li title="Community Hall of Fame"><a href="https://www.yiiframework.com/user/halloffame" tabindex="-1">Hall of Fame</a></li>
+<li title="Community Badges"><a href="https://www.yiiframework.com/badges" tabindex="-1">Badges</a></li></ul></li>
+<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">More <span class="caret"></span></a><ul id="w17" class="dropdown-menu"><li class="separator dropdown-header">Learn</li>
+<li><a href="https://www.yiiframework.com/books" tabindex="-1">Books</a></li>
+<li><a href="https://www.yiiframework.com/resources" tabindex="-1">Resources</a></li>
+<li class="separator dropdown-header">Develop</li>
+<li><a href="https://www.yiiframework.com/download" tabindex="-1">Download Yii</a></li>
+<li><a href="https://www.yiiframework.com/report-issue" tabindex="-1">Report an Issue</a></li>
+<li><a href="https://www.yiiframework.com/security" tabindex="-1">Report a Security Issue</a></li>
+<li><a href="https://www.yiiframework.com/contribute" tabindex="-1">Contribute to Yii</a></li>
+<li><a href="https://www.yiiframework.com/donate" tabindex="-1">Donate</a></li>
+<li class="separator dropdown-header">About</li>
+<li><a href="intro-yii.html" tabindex="-1">What is Yii?</a></li>
+<li><a href="https://www.yiiframework.com/release-cycle" tabindex="-1">Release Cycle</a></li>
+<li><a href="https://www.yiiframework.com/news" tabindex="-1">News</a></li>
+<li><a href="https://www.yiiframework.com/license" tabindex="-1">License</a></li>
+<li><a href="https://www.yiiframework.com/team" tabindex="-1">Team</a></li>
+<li><a href="https://www.yiiframework.com/logo" tabindex="-1">Official Logos and Design</a></li></ul></li></ul>
+        
+        <div class="nav navbar-nav navbar-right">
+            <ul id="login-nav" class="nav navbar-nav navbar-main-menu nav"><li><a href="https://www.yiiframework.com/login">Login</a></li></ul>            </div>
+
+        <div class="nav navbar-nav navbar-right">
+                    <form id="search-form" class="navbar-form" action="https://www.yiiframework.com/search" method="get">
+<input type="hidden" name="language" value="en">
+<input type="hidden" name="version" value="2.0">
+<input type="hidden" name="type" value="guide">        <div class="form-group nospace">
+        <div class="input-group">
+            <input type="text" class="form-control" id="search" name="q" placeholder="Search Guide…" autocomplete="off" value="">
+        </div>
+    </div>
+    <div id="search-resultbox"></div>
+    </form>            </div>
+
+        
+    </div>
+</div>
+</header>
+
+        <div class="section-header-wrap">
+<div class="container section-header lang-en">
+    <div class="row headline-row">
+        <div class="col-xs-12 col-md-12">
+            <div class="section-headline">The Definitive Guide to Yii 2.0</div>
+        </div>
+                </div>
+            <div class="row content-selector-row">
+        <div class="col-xs-12 col-md-offset-7 col-md-5">
+            <nav class="version-selector">
+    <div class="btn-group btn-group-justified btn-group-3-element">
+    <div class="btn-group btn-group-sm"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Download <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li role="presentation"><a href="https://www.yiiframework.com/doc/download/yii-guide-2.0-en.pdf" role="menuitem" tabindex="-1">PDF</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/download/yii-docs-2.0-en.tar.gz" role="menuitem" tabindex="-1">Offline HTML (tar.gz)</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/download/yii-docs-2.0-en.tar.bz2" role="menuitem" tabindex="-1">Offline HTML (tar.bz2)</a></li></ul></div>                <div class="btn-group btn-group-sm"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">English <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/ar/db-dao" role="menuitem" tabindex="-1">العربية</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/es/db-dao" role="menuitem" tabindex="-1">Español</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/fr/db-dao" role="menuitem" tabindex="-1">Français</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/id/db-dao" role="menuitem" tabindex="-1">Bahasa Indonesia</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/ja/db-dao" role="menuitem" tabindex="-1">日本語</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/pl/db-dao" role="menuitem" tabindex="-1">Polski</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/pt-br/db-dao" role="menuitem" tabindex="-1">Português brasileiro</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/ru/db-dao" role="menuitem" tabindex="-1">Русский</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/uk/db-dao" role="menuitem" tabindex="-1">Українська</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/uz/db-dao" role="menuitem" tabindex="-1">Oʻzbekcha</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/zh-cn/db-dao" role="menuitem" tabindex="-1">简体中文</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/2.0/vi/db-dao" role="menuitem" tabindex="-1">Tiếng Việt</a></li></ul></div>
+            <div class="btn-group btn-group-sm"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Version 2.0 <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li role="presentation"><a href="https://www.yiiframework.com/doc/guide/1.1/en" role="menuitem" tabindex="-1">1.1</a></li>
+<li role="presentation"><a href="https://www.yiiframework.com/doc/guide/1.0/en" role="menuitem" tabindex="-1">1.0</a></li></ul></div>    </div>
+</nav>
+        </div>
+    </div>
+        </div>
+</div>
+
+                    <div class="visible-huge fixed lang-en">
+<nav id="scrollnav" data-spy="affix" data-offset-top="120">
+    <ul class="nav hidden-xs hidden-sm">
+        <li><a href="#database-access-objects">Database Access Objects</a></li><li><a href="#creating-db-connections">Creating DB Connections</a></li><li><a href="#executing-sql-queries">Executing SQL Queries</a><ul class="nav"><li class="subheading"><a href="#binding-parameters">Binding Parameters</a></li><li class="subheading"><a href="#non-select-queries">Executing Non-SELECT Queries</a></li></ul></li><li><a href="#quoting-table-and-column-names">Quoting Table and Column Names</a><ul class="nav"><li class="subheading"><a href="#using-table-prefix">Using Table Prefix</a></li></ul></li><li><a href="#performing-transactions">Performing Transactions</a><ul class="nav"><li class="subheading"><a href="#specifying-isolation-levels">Specifying Isolation Levels</a></li><li class="subheading"><a href="#nesting-transactions">Nesting Transactions</a></li></ul></li><li><a href="#read-write-splitting">Replication and Read-Write Splitting</a></li><li><a href="#database-schema">Working with Database Schema</a></li><li><a href="#user-notes">User Contributed Notes</a></li>        </ul>
+</nav>
+</div>
+<div class="container guide-view" xmlns="http://www.w3.org/1999/xhtml">
+<div class="row visible-xs">
+    <div class="col-md-12">
+        <p class="pull-right topmost">
+            <button type="button" title="Toggle Side-Nav" class="btn btn-primary btn-xs" data-toggle="offcanvas">SideNav</button>
+        </p>
+    </div>
+</div>
+<div class="row row-offcanvas">
+    <div class="col-sm-3 col-md-3 col-lg-3 lang-en">
+        <form class="mini-search-form" action="https://www.yiiframework.com/search" method="get">
+<input type="hidden" name="language" value="en">
+<input type="hidden" name="version" value="2.0">
+<input type="hidden" name="type" value="guide"><input type="text" class="form-control" name="q" placeholder="Search the Guide…" autocomplete="off" aria-label="Search box"> <button type="submit" class="btn btn-primary sr-only">Search</button></form>            <div id="guide-navigation" class="sidenav-offcanvas"><a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-0">Introduction</a><div id="guide-navigation-0" class="submenu panel-collapse collapse"><a class="list-group-item" href="intro-yii.html">About Yii</a>
+<a class="list-group-item" href="intro-upgrade-from-v1.html">Upgrading from Version 1.1</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-1">Getting Started</a><div id="guide-navigation-1" class="submenu panel-collapse collapse"><a class="list-group-item" href="start-prerequisites.html">What do you need to know</a>
+<a class="list-group-item" href="start-installation.html">Installing Yii</a>
+<a class="list-group-item" href="start-workflow.html">Running Applications</a>
+<a class="list-group-item" href="start-hello.html">Saying Hello</a>
+<a class="list-group-item" href="start-forms.html">Working with Forms</a>
+<a class="list-group-item" href="start-databases.html">Working with Databases</a>
+<a class="list-group-item" href="start-gii.html">Generating Code with Gii</a>
+<a class="list-group-item" href="start-looking-ahead.html">Looking Ahead</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-2">Application Structure</a><div id="guide-navigation-2" class="submenu panel-collapse collapse"><a class="list-group-item" href="structure-overview.html">Application Structure Overview</a>
+<a class="list-group-item" href="structure-entry-scripts.html">Entry Scripts</a>
+<a class="list-group-item" href="structure-applications.html">Applications</a>
+<a class="list-group-item" href="structure-application-components.html">Application Components</a>
+<a class="list-group-item" href="structure-controllers.html">Controllers</a>
+<a class="list-group-item" href="structure-models.html">Models</a>
+<a class="list-group-item" href="structure-views.html">Views</a>
+<a class="list-group-item" href="structure-modules.html">Modules</a>
+<a class="list-group-item" href="structure-filters.html">Filters</a>
+<a class="list-group-item" href="structure-widgets.html">Widgets</a>
+<a class="list-group-item" href="structure-assets.html">Assets</a>
+<a class="list-group-item" href="structure-extensions.html">Extensions</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-3">Handling Requests</a><div id="guide-navigation-3" class="submenu panel-collapse collapse"><a class="list-group-item" href="runtime-overview.html">Request Handling Overview</a>
+<a class="list-group-item" href="runtime-bootstrapping.html">Bootstrapping</a>
+<a class="list-group-item" href="runtime-routing.html">Routing and URL Creation</a>
+<a class="list-group-item" href="runtime-requests.html">Requests</a>
+<a class="list-group-item" href="runtime-responses.html">Responses</a>
+<a class="list-group-item" href="runtime-sessions-cookies.html">Sessions and Cookies</a>
+<a class="list-group-item" href="runtime-handling-errors.html">Handling Errors</a>
+<a class="list-group-item" href="runtime-logging.html">Logging</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-4">Key Concepts</a><div id="guide-navigation-4" class="submenu panel-collapse collapse"><a class="list-group-item" href="concept-components.html">Components</a>
+<a class="list-group-item" href="concept-properties.html">Properties</a>
+<a class="list-group-item" href="concept-events.html">Events</a>
+<a class="list-group-item" href="concept-behaviors.html">Behaviors</a>
+<a class="list-group-item" href="concept-configurations.html">Configurations</a>
+<a class="list-group-item" href="concept-aliases.html">Aliases</a>
+<a class="list-group-item" href="concept-autoloading.html">Class Autoloading</a>
+<a class="list-group-item" href="concept-service-locator.html">Service Locator</a>
+<a class="list-group-item" href="concept-di-container.html">Dependency Injection Container</a></div>
+<a class="list-group-item has-children active" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-5">Working with Databases</a><div id="guide-navigation-5" class="submenu panel-collapse collapse in active-parent"><a class="list-group-item active" href="db-dao.html">Database Access Objects</a>
+<a class="list-group-item" href="db-query-builder.html">Query Builder</a>
+<a class="list-group-item" href="db-active-record.html">Active Record</a>
+<a class="list-group-item" href="db-migrations.html">Migrations</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-sphinx/doc/guide/2.0/en.html">Sphinx</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-redis/doc/guide/2.0/en.html">Redis</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-mongodb/doc/guide/3.0/en.html">MongoDB</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-elasticsearch/doc/guide/2.1/en.html">ElasticSearch</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-6">Getting Data from Users</a><div id="guide-navigation-6" class="submenu panel-collapse collapse"><a class="list-group-item" href="input-forms.html">Creating Forms</a>
+<a class="list-group-item" href="input-validation.html">Validating Input</a>
+<a class="list-group-item" href="input-file-upload.html">Uploading Files</a>
+<a class="list-group-item" href="input-tabular-input.html">Collecting Tabular Input</a>
+<a class="list-group-item" href="input-multiple-models.html">Getting Data for Multiple Models</a>
+<a class="list-group-item" href="input-form-javascript.html">Extending ActiveForm on the Client Side</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-7">Displaying Data</a><div id="guide-navigation-7" class="submenu panel-collapse collapse"><a class="list-group-item" href="output-formatting.html">Data Formatting</a>
+<a class="list-group-item" href="output-pagination.html">Pagination</a>
+<a class="list-group-item" href="output-sorting.html">Sorting</a>
+<a class="list-group-item" href="output-data-providers.html">Data Providers</a>
+<a class="list-group-item" href="output-data-widgets.html">Data Widgets</a>
+<a class="list-group-item" href="output-client-scripts.html">Working with Client Scripts</a>
+<a class="list-group-item" href="output-theming.html">Theming</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-8">Security</a><div id="guide-navigation-8" class="submenu panel-collapse collapse"><a class="list-group-item" href="security-overview.html">Security Overview</a>
+<a class="list-group-item" href="security-authentication.html">Authentication</a>
+<a class="list-group-item" href="security-authorization.html">Authorization</a>
+<a class="list-group-item" href="security-passwords.html">Working with Passwords</a>
+<a class="list-group-item" href="security-cryptography.html">Cryptography</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-authclient/doc/guide/2.2/en.html">Auth Clients</a>
+<a class="list-group-item" href="security-best-practices.html">Best Practices</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-9">Caching</a><div id="guide-navigation-9" class="submenu panel-collapse collapse"><a class="list-group-item" href="caching-overview.html">Caching Overview</a>
+<a class="list-group-item" href="caching-data.html">Data Caching</a>
+<a class="list-group-item" href="caching-fragment.html">Fragment Caching</a>
+<a class="list-group-item" href="caching-page.html">Page Caching</a>
+<a class="list-group-item" href="caching-http.html">HTTP Caching</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-10">RESTful Web Services</a><div id="guide-navigation-10" class="submenu panel-collapse collapse"><a class="list-group-item" href="rest-quick-start.html">Quick Start</a>
+<a class="list-group-item" href="rest-resources.html">Resources</a>
+<a class="list-group-item" href="rest-controllers.html">Controllers</a>
+<a class="list-group-item" href="rest-filtering-collections.html">Filtering Collections</a>
+<a class="list-group-item" href="rest-routing.html">Routing</a>
+<a class="list-group-item" href="rest-response-formatting.html">Response Formatting</a>
+<a class="list-group-item" href="rest-authentication.html">Authentication</a>
+<a class="list-group-item" href="rest-rate-limiting.html">Rate Limiting</a>
+<a class="list-group-item" href="rest-versioning.html">Versioning</a>
+<a class="list-group-item" href="rest-error-handling.html">Error Handling</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-11">Development Tools</a><div id="guide-navigation-11" class="submenu panel-collapse collapse"><a class="list-group-item" href="../../../../extension/yiisoft/yii2-debug/doc/guide/3.0/en.html">Debug Toolbar and Debugger</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-gii/doc/guide/2.2/en.html">Generating Code using Gii</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-apidoc.html">Generating API Documentation</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-12">Testing</a><div id="guide-navigation-12" class="submenu panel-collapse collapse"><a class="list-group-item" href="test-overview.html">Testing Overview</a>
+<a class="list-group-item" href="test-environment-setup.html">Testing environment setup</a>
+<a class="list-group-item" href="test-unit.html">Unit Tests</a>
+<a class="list-group-item" href="test-functional.html">Functional Tests</a>
+<a class="list-group-item" href="test-acceptance.html">Acceptance Tests</a>
+<a class="list-group-item" href="test-fixtures.html">Fixtures</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-13">Special Topics</a><div id="guide-navigation-13" class="submenu panel-collapse collapse"><a class="list-group-item" href="../../../../extension/yiisoft/yii2-app-advanced/doc/guide/2.0/en.html">Advanced Project Template</a>
+<a class="list-group-item" href="tutorial-start-from-scratch.html">Building Application from Scratch</a>
+<a class="list-group-item" href="tutorial-console.html">Console Commands</a>
+<a class="list-group-item" href="tutorial-core-validators.html">Core Validators</a>
+<a class="list-group-item" href="tutorial-docker.html">Docker</a>
+<a class="list-group-item" href="tutorial-i18n.html">Internationalization</a>
+<a class="list-group-item" href="tutorial-mailing.html">Mailing</a>
+<a class="list-group-item" href="tutorial-performance-tuning.html">Performance Tuning</a>
+<a class="list-group-item" href="tutorial-shared-hosting.html">Shared Hosting Environment</a>
+<a class="list-group-item" href="tutorial-template-engines.html">Template Engines</a>
+<a class="list-group-item" href="tutorial-yii-integration.html">Working with Third-Party Code</a>
+<a class="list-group-item" href="tutorial-yii-as-micro-framework.html">Using Yii as a micro framework</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-14">Widgets</a><div id="guide-navigation-14" class="submenu panel-collapse collapse"><a class="list-group-item" href="https://www.yiiframework.com/doc-2.0/yii-grid-gridview.html">GridView</a>
+<a class="list-group-item" href="https://www.yiiframework.com/doc-2.0/yii-widgets-listview.html">ListView</a>
+<a class="list-group-item" href="https://www.yiiframework.com/doc-2.0/yii-widgets-detailview.html">DetailView</a>
+<a class="list-group-item" href="https://www.yiiframework.com/doc-2.0/guide-input-forms.html#activerecord-based-forms-activeform">ActiveForm</a>
+<a class="list-group-item" href="https://www.yiiframework.com/doc-2.0/yii-widgets-pjax.html">Pjax</a>
+<a class="list-group-item" href="https://www.yiiframework.com/doc-2.0/yii-widgets-menu.html">Menu</a>
+<a class="list-group-item" href="https://www.yiiframework.com/doc-2.0/yii-widgets-linkpager.html">LinkPager</a>
+<a class="list-group-item" href="https://www.yiiframework.com/doc-2.0/yii-widgets-linksorter.html">LinkSorter</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-bootstrap/doc/guide/2.0/en.html">Bootstrap Widgets</a>
+<a class="list-group-item" href="../../../../extension/yiisoft/yii2-jui/doc/guide/2.0/en.html">jQuery UI Widgets</a></div>
+<a class="list-group-item has-children" href="#" data-toggle="collapse" data-parent="#guide-navigation" data-target="#guide-navigation-15">Helpers</a><div id="guide-navigation-15" class="submenu panel-collapse collapse"><a class="list-group-item" href="helper-overview.html">Helpers Overview</a>
+<a class="list-group-item" href="helper-array.html">ArrayHelper</a>
+<a class="list-group-item" href="helper-html.html">Html</a>
+<a class="list-group-item" href="helper-json.html">Json</a>
+<a class="list-group-item" href="helper-url.html">Url</a></div></div>        </div>
+    <div class="col-sm-9 col-md-9 col-lg-9" role="main">
+
+        <div class="guide-content content lang-en">
+
+    <div class="pull-right">
+    
+<div class="star-wrapper">
+<span class="fa fa-star-o" data-star-url="/ajax/star?type=doc&amp;id=199"></span>            <span class="star-count">3</span> followers    </div>
+</div>
+
+<h1 id="database-access-objects">Database Access Objects <a href="#database-access-objects" class="hashlink"></a></h1>
+<div class="toc hidden-lg"><ol><li><a href="#creating-db-connections">Creating DB Connections</a></li>
+<li><a href="#executing-sql-queries">Executing SQL Queries</a></li>
+<li><a href="#quoting-table-and-column-names">Quoting Table and Column Names</a></li>
+<li><a href="#performing-transactions">Performing Transactions</a></li>
+<li><a href="#read-write-splitting">Replication and Read-Write Splitting</a></li>
+<li><a href="#database-schema">Working with Database Schema</a></li></ol></div>
+<p>Built on top of <a href="https://www.php.net/manual/en/book.pdo.php">PDO</a>, Yii DAO (Database Access Objects) provides an
+object-oriented API for accessing relational databases. It is the foundation for other more advanced database
+access methods, including <a href="db-query-builder.html">query builder</a> and <a href="db-active-record.html">active record</a>.</p>
+<p>When using Yii DAO, you mainly need to deal with plain SQLs and PHP arrays. As a result, it is the most efficient 
+way to access databases. However, because SQL syntax may vary for different databases, using Yii DAO also means 
+you have to take extra effort to create a database-agnostic application.</p>
+<p>In Yii 2.0, DAO supports the following databases out of the box:</p>
+<ul>
+<li><a href="https://www.mysql.com/">MySQL</a></li>
+<li><a href="https://mariadb.com/">MariaDB</a></li>
+<li><a href="https://sqlite.org/">SQLite</a></li>
+<li><a href="https://www.postgresql.org/">PostgreSQL</a>: version 8.4 or higher</li>
+<li><a href="https://www.cubrid.org/">CUBRID</a>: version 9.3 or higher.</li>
+<li><a href="https://www.oracle.com/database/">Oracle</a></li>
+<li><a href="https://www.microsoft.com/en-us/sqlserver/default.aspx">MSSQL</a>: version 2008 or higher.</li>
+</ul>
+<blockquote class="note"><p><strong>Note: </strong>In assets find AppAsset.php and redact them with links of js and new css
+<a href="https://github.com/yiisoft/yii2/issues/10975#issuecomment-248479268">instruction provided by community</a>
+to compile it or use <a href="https://github.com/taq/pdooci">PDO emulation layer</a>.</p>
+</blockquote>
+<h2 id="creating-db-connections">Creating DB Connections  <a href="#creating-db-connections" class="hashlink"></a></h2><p>To access a database, you first need to connect to it by creating an instance of <a href="../../../api/2.0/yii-db-connection.html">yii\db\Connection</a>:</p>
+<pre><code class="hljs php language-php">$db = <span class="hljs-keyword">new</span> yii\db\Connection([
+<span class="hljs-string">'dsn'</span> =&gt; <span class="hljs-string">'mysql:host=localhost;dbname=example'</span>,
+<span class="hljs-string">'username'</span> =&gt; <span class="hljs-string">'root'</span>,
+<span class="hljs-string">'password'</span> =&gt; <span class="hljs-string">''</span>,
+<span class="hljs-string">'charset'</span> =&gt; <span class="hljs-string">'utf8'</span>,
+]);
+</code></pre>
+<p>Because a DB connection often needs to be accessed in different places, a common practice is to configure it
+in terms of an <a href="structure-application-components.html">application component</a> like the following main.js:</p>
+<pre><code class="hljs php language-php">$( <span class="hljs-string">".alert"</span> ).animate({
+    opacity: <span class="hljs-number">0.25</span>,
+  }, <span class="hljs-number">2000</span>, function() {
+      $( <span class="hljs-string">".alert"</span> ).hide(<span class="hljs-string">'show'</span>);
+  });
+
+
+$( <span class="hljs-string">".alert"</span> ).animate({
+  opacity: <span class="hljs-number">0.25</span>,
+  }, <span class="hljs-number">2000</span>, function() {
+      $( <span class="hljs-string">".alert"</span> ).hide(<span class="hljs-string">'show'</span>);
+  });
+</code></pre>
+<p>You can then access the DB connection via the expression <code>Yii::$app-&gt;db</code>.</p>
+<blockquote class="tip"><p><strong>Tip: </strong>You can CRUD User configure multiple DB application components if your application needs to access multiple databases.☑☑☑✖✖✖</p>
+</blockquote>
+<p>When configuring a DB connection, you should always specify its Data Source Name (DSN) via the <a href="../../../api/2.0/yii-db-connection.html#$dsn-detail">dsn</a> 
+property. The format of DSN varies for different databases. Please refer to the <a href="https://www.php.net/manual/en/pdo.construct.php">PHP manual</a> 
+for more details. Below are some examples:</p>
+<ul>
+<li>MySQL, MariaDB: <code>mysql:host=localhost;dbname=mydatabase</code></li>
+<li>SQLite: <code>sqlite:/path/to/database/file</code></li>
+<li>PostgreSQL: <code>pgsql:host=localhost;port=5432;dbname=mydatabase</code></li>
+<li>CUBRID: <code>cubrid:dbname=demodb;host=localhost;port=33000</code></li>
+<li>MS SQL Server (via sqlsrv driver): <code>sqlsrv:Server=localhost;Database=mydatabase</code></li>
+<li>MS SQL Server (via dblib driver): <code>dblib:host=localhost;dbname=mydatabase</code></li>
+<li>MS SQL Server (via mssql driver): <code>mssql:host=localhost;dbname=mydatabase</code></li>
+<li>Oracle: <code>oci:dbname=//localhost:1521/mydatabase</code></li>
+</ul>
+<p>Note that if you are connecting with a database via ODBC, you should configure the <a href="../../../api/2.0/yii-db-connection.html#$driverName-detail">yii\db\Connection::$driverName</a>
+property so that Yii can know the actual database type. For example,</p>
+<pre><code class="hljs php language-php"><span class="hljs-string">'db'</span> =&gt; [
+<span class="hljs-string">'class'</span> =&gt; <span class="hljs-string">'yii\db\Connection'</span>,
+<span class="hljs-string">'driverName'</span> =&gt; <span class="hljs-string">'mysql'</span>,
+<span class="hljs-string">'dsn'</span> =&gt; <span class="hljs-string">'odbc:Driver={MySQL};Server=localhost;Database=test'</span>,
+<span class="hljs-string">'username'</span> =&gt; <span class="hljs-string">'root'</span>,
+<span class="hljs-string">'password'</span> =&gt; <span class="hljs-string">''</span>,
+],
+</code></pre>
+<p>Besides the <a href="../../../api/2.0/yii-db-connection.html#$dsn-detail">dsn</a> property, you often need to configure <a href="../../../api/2.0/yii-db-connection.html#$username-detail">username</a>
+and <a href="../../../api/2.0/yii-db-connection.html#$password-detail">password</a>. Please refer to <a href="../../../api/2.0/yii-db-connection.html">yii\db\Connection</a> for the full list of configurable properties. </p>
+<blockquote class="info"><p><strong>Info: </strong>When you create a DB connection instance, the actual connection to the database is not established until
+you execute the first SQL or you call the <a href="../../../api/2.0/yii-db-connection.html#open()-detail">open()</a> method explicitly.</p>
+</blockquote>
+<blockquote class="tip"><p><strong>Tip: </strong>Sometimes you may want to execute some queries right after the database connection is established to initialize
+some environment variables (e.g., to set the timezone or character set). You can do so by registering an event handler
+for the <a href="../../../api/2.0/yii-db-connection.html#EVENT_AFTER_OPEN-detail">afterOpen</a> event
+of the database connection. You may register the handler directly in the application configuration like so:</p>
+<pre><code class="hljs php language-php"><span class="hljs-string">'db'</span> =&gt; [
+<span class="hljs-comment">// ...</span>
+<span class="hljs-string">'on afterOpen'</span> =&gt; <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($event)</span> </span>{
+    <span class="hljs-comment">// $event-&gt;sender refers to the DB connection</span>
+    $event-&gt;sender-&gt;createCommand(<span class="hljs-string">"SET time_zone = 'UTC'"</span>)-&gt;execute();
+}
+],
+</code></pre>
+</blockquote>
+<p>For MS SQL Server additional connection option is needed for proper binary data handling:</p>
+<pre><code class="hljs php language-php"><span class="hljs-string">'db'</span> =&gt; [
+<span class="hljs-string">'class'</span> =&gt; <span class="hljs-string">'yii\db\Connection'</span>,
+<span class="hljs-string">'dsn'</span> =&gt; <span class="hljs-string">'sqlsrv:Server=localhost;Database=mydatabase'</span>,
+<span class="hljs-string">'attributes'</span> =&gt; [
+    \PDO::SQLSRV_ATTR_ENCODING =&gt; \PDO::SQLSRV_ENCODING_SYSTEM
+]
+],
+</code></pre>
+<h2 id="executing-sql-queries">Executing SQL Queries  <a href="#executing-sql-queries" class="hashlink"></a></h2><p>Once you have a database connection instance, you can execute a SQL query by taking the following steps:</p>
+<ol>
+<li>Create a <a href="../../../api/2.0/yii-db-command.html">yii\db\Command</a> with a plain SQL query;</li>
+<li>Bind parameters (optional);</li>
+<li>Call one of the SQL execution methods in <a href="../../../api/2.0/yii-db-command.html">yii\db\Command</a>.</li>
+</ol>
+<p>The following example shows various ways of fetching data from a database:</p>
+<pre><code class="hljs php language-php"><span class="hljs-comment">// return a set of rows. each row is an associative array of column names and values.</span>
+<span class="hljs-comment">// an empty array is returned if the query returned no results</span>
+$posts = Yii::$app-&gt;db-&gt;createCommand(<span class="hljs-string">'SELECT * FROM post'</span>)
+        -&gt;queryAll();
+
+<span class="hljs-comment">// return a single row (the first row)</span>
+<span class="hljs-comment">// false is returned if the query has no result</span>
+$post = Yii::$app-&gt;db-&gt;createCommand(<span class="hljs-string">'SELECT * FROM post WHERE id=1'</span>)
+       -&gt;queryOne();
+
+<span class="hljs-comment">// return a single column (the first column)</span>
+<span class="hljs-comment">// an empty array is returned if the query returned no results</span>
+$titles = Yii::$app-&gt;db-&gt;createCommand(<span class="hljs-string">'SELECT title FROM post'</span>)
+         -&gt;queryColumn();
+
+<span class="hljs-comment">// return a scalar value</span>
+<span class="hljs-comment">// false is returned if the query has no result</span>
+$count = Yii::$app-&gt;db-&gt;createCommand(<span class="hljs-string">'SELECT COUNT(*) FROM post'</span>)
+         -&gt;queryScalar();
+</code></pre>
+<blockquote class="note"><p><strong>Note: </strong>To preserve precision, the data fetched from databases are all represented as strings, even if the corresponding
+database column types are numerical.</p>
+</blockquote>
+<h3 id="binding-parameters">Binding Parameters  <a href="#binding-parameters" class="hashlink"></a></h3><p>When creating a DB command from a SQL with parameters, you should almost always use the approach of binding parameters
+to prevent SQL injection attacks. For example,</p>
+<pre><code class="hljs php language-php">$post = Yii::$app-&gt;db-&gt;createCommand(<span class="hljs-string">'SELECT * FROM post WHERE id=:id AND status=:status'</span>)
+       -&gt;bindValue(<span class="hljs-string">':id'</span>, $_GET[<span class="hljs-string">'id'</span>])
+       -&gt;bindValue(<span class="hljs-string">':status'</span>, <span class="hljs-number">1</span>)
+       -&gt;queryOne();
+</code></pre>
+<p>In the SQL statement, you can embed one or multiple parameter placeholders (e.g. <code>:id</code> in the above example). A parameter
+placeholder should be a string starting with a colon. You may then call one of the following parameter binding methods
+to bind the parameter values:</p>
+<ul>
+<li><a href="../../../api/2.0/yii-db-command.html#bindValue()-detail">bindValue()</a>: bind a single parameter value </li>
+<li><a href="../../../api/2.0/yii-db-command.html#bindValues()-detail">bindValues()</a>: bind multiple parameter values in one call</li>
+<li><a href="../../../api/2.0/yii-db-command.html#bindParam()-detail">bindParam()</a>: similar to <a href="../../../api/2.0/yii-db-command.html#bindValue()-detail">bindValue()</a> but also
+support binding parameter references.</li>
+</ul>
+<p>The following example shows alternative ways of binding parameters:</p>
+<pre><code class="hljs php language-php">$params = [<span class="hljs-string">':id'</span> =&gt; $_GET[<span class="hljs-string">'id'</span>], <span class="hljs-string">':status'</span> =&gt; <span class="hljs-number">1</span>];
+
+$post = Yii::$app-&gt;db-&gt;createCommand(<span class="hljs-string">'SELECT * FROM post WHERE id=:id AND status=:status'</span>)
+       -&gt;bindValues($params)
+       -&gt;queryOne();
+       
+$post = Yii::$app-&gt;db-&gt;createCommand(<span class="hljs-string">'SELECT * FROM post WHERE id=:id AND status=:status'</span>, $params)
+       -&gt;queryOne();
+</code></pre>
+<p>Parameter binding is implemented via <a href="https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php">prepared statements</a>.
+Besides preventing SQL injection attacks, it may also improve performance by preparing a SQL statement once and
+executing it multiple times with different parameters. For example,</p>
+<pre><code class="hljs php language-php">$command = Yii::$app-&gt;db-&gt;createCommand(<span class="hljs-string">'SELECT * FROM post WHERE id=:id'</span>);
+
+$post1 = $command-&gt;bindValue(<span class="hljs-string">':id'</span>, <span class="hljs-number">1</span>)-&gt;queryOne();
+$post2 = $command-&gt;bindValue(<span class="hljs-string">':id'</span>, <span class="hljs-number">2</span>)-&gt;queryOne();
+<span class="hljs-comment">// ...</span>
+</code></pre>
+<p>Because <a href="../../../api/2.0/yii-db-command.html#bindParam()-detail">bindParam()</a> supports binding parameters by references, the above code
+can also be written like the following:</p>
+<pre><code class="hljs php language-php">$command = Yii::$app-&gt;db-&gt;createCommand(<span class="hljs-string">'SELECT * FROM post WHERE id=:id'</span>)
+          -&gt;bindParam(<span class="hljs-string">':id'</span>, $id);
+
+$id = <span class="hljs-number">1</span>;
+$post1 = $command-&gt;queryOne();
+
+$id = <span class="hljs-number">2</span>;
+$post2 = $command-&gt;queryOne();
+<span class="hljs-comment">// ...</span>
+</code></pre>
+<p>Notice that you bind the placeholder to the <code>$id</code> variable before the execution, and then change the value of that variable 
+before each subsequent execution (this is often done with loops). Executing queries in this manner can be vastly 
+more efficient than running a new query for every different parameter value. </p>
+<blockquote class="info"><p><strong>Info: </strong>Parameter binding is only used in places where values need to be inserted into strings that contain plain SQL.
+In many places in higher abstraction layers like <a href="db-query-builder.html">query builder</a> and <a href="db-active-record.html">active record</a>
+you often specify an array of values which will be transformed into SQL. In these places parameter binding is done by Yii
+internally, so there is no need to specify params manually.</p>
+</blockquote>
+<h3 id="non-select-queries">Executing Non-SELECT Queries  <a href="#non-select-queries" class="hashlink"></a></h3><p>The <code>queryXyz()</code> methods introduced in the previous sections all deal with SELECT queries which fetch data from databases.
+For queries that do not bring back data, you should call the <a href="../../../api/2.0/yii-db-command.html#execute()-detail">yii\db\Command::execute()</a> method instead. For example,</p>
+<pre><code class="hljs php language-php">Yii::$app-&gt;db-&gt;createCommand(<span class="hljs-string">'UPDATE post SET status=1 WHERE id=1'</span>)
+-&gt;execute();
+</code></pre>
+<p>The <a href="../../../api/2.0/yii-db-command.html#execute()-detail">yii\db\Command::execute()</a> method returns the number of rows affected by the SQL execution.</p>
+<p>For INSERT, UPDATE and DELETE queries, instead of writing plain SQLs, you may call <a href="../../../api/2.0/yii-db-command.html#insert()-detail">insert()</a>,
+<a href="../../../api/2.0/yii-db-command.html#update()-detail">update()</a>, <a href="../../../api/2.0/yii-db-command.html#delete()-detail">delete()</a>, respectively, to build the corresponding
+SQLs. These methods will properly quote table and column names and bind parameter values. For example,</p>
+<pre><code class="hljs php language-php"><span class="hljs-comment">// INSERT (table name, column values)</span>
+Yii::$app-&gt;db-&gt;createCommand()-&gt;insert(<span class="hljs-string">'user'</span>, [
+<span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'Sam'</span>,
+<span class="hljs-string">'age'</span> =&gt; <span class="hljs-number">30</span>,
+])-&gt;execute();
+
+<span class="hljs-comment">// UPDATE (table name, column values, condition)</span>
+Yii::$app-&gt;db-&gt;createCommand()-&gt;update(<span class="hljs-string">'user'</span>, [<span class="hljs-string">'status'</span> =&gt; <span class="hljs-number">1</span>], <span class="hljs-string">'age &gt; 30'</span>)-&gt;execute();
+
+<span class="hljs-comment">// DELETE (table name, condition)</span>
+Yii::$app-&gt;db-&gt;createCommand()-&gt;delete(<span class="hljs-string">'user'</span>, <span class="hljs-string">'status = 0'</span>)-&gt;execute();
+</code></pre>
+<p>You may also call <a href="../../../api/2.0/yii-db-command.html#batchInsert()-detail">batchInsert()</a> to insert multiple rows in one shot, which is much
+more efficient than inserting one row at a time:</p>
+<pre><code class="hljs php language-php"><span class="hljs-comment">// table name, column names, column values</span>
+Yii::$app-&gt;db-&gt;createCommand()-&gt;batchInsert(<span class="hljs-string">'user'</span>, [<span class="hljs-string">'name'</span>, <span class="hljs-string">'age'</span>], [
+[<span class="hljs-string">'Tom'</span>, <span class="hljs-number">30</span>],
+[<span class="hljs-string">'Jane'</span>, <span class="hljs-number">20</span>],
+[<span class="hljs-string">'Linda'</span>, <span class="hljs-number">25</span>],
+])-&gt;execute();
+</code></pre>
+<p>Another useful method is <a href="../../../api/2.0/yii-db-command.html#upsert()-detail">upsert()</a>. Upsert is an atomic operation that inserts rows into
+a database table if they do not already exist (matching unique constraints), or update them if they do:</p>
+<pre><code class="hljs php language-php">Yii::$app-&gt;db-&gt;createCommand()-&gt;upsert(<span class="hljs-string">'pages'</span>, [
+<span class="hljs-string">'name'</span> =&gt; <span class="hljs-string">'Front page'</span>,
+<span class="hljs-string">'url'</span> =&gt; <span class="hljs-string">'https://example.com/'</span>, <span class="hljs-comment">// url is unique</span>
+<span class="hljs-string">'visits'</span> =&gt; <span class="hljs-number">0</span>,
+], [
+<span class="hljs-string">'visits'</span> =&gt; <span class="hljs-keyword">new</span> \yii\db\Expression(<span class="hljs-string">'visits + 1'</span>),
+], $params)-&gt;execute();
+</code></pre>
+<p>The code above will either insert a new page record or increment its visit counter atomically.</p>
+<p>Note that the aforementioned methods only create the query and you always have to call <a href="../../../api/2.0/yii-db-command.html#execute()-detail">execute()</a>
+to actually run them.</p>
+<h2 id="quoting-table-and-column-names">Quoting Table and Column Names  <a href="#quoting-table-and-column-names" class="hashlink"></a></h2><p>When writing database-agnostic code, properly quoting table and column names is often a headache because
+different databases have different name quoting rules. To overcome this problem, you may use the following
+quoting syntax introduced by Yii:</p>
+<ul>
+<li><code>[[column name]]</code>: enclose a column name to be quoted in double square brackets; </li>
+<li><code>{{table name}}</code>: enclose a table name to be quoted in double curly brackets.</li>
+</ul>
+<p>Yii DAO will automatically convert such constructs into the corresponding quoted column or table names using the
+DBMS specific syntax.
+For example,</p>
+<pre><code class="hljs php language-php"><span class="hljs-comment">// executes this SQL for MySQL: SELECT COUNT(`id`) FROM `employee`</span>
+$count = Yii::$app-&gt;db-&gt;createCommand(<span class="hljs-string">"SELECT COUNT([[id]]) FROM {{employee}}"</span>)
+        -&gt;queryScalar();
+</code></pre>
+<h3 id="using-table-prefix">Using Table Prefix  <a href="#using-table-prefix" class="hashlink"></a></h3><p>If most of your DB tables names share a common prefix, you may use the table prefix feature provided
+by Yii DAO.</p>
+<p>First, specify the table prefix via the <a href="../../../api/2.0/yii-db-connection.html#$tablePrefix-detail">yii\db\Connection::$tablePrefix</a> property in the application config:</p>
+<pre><code class="hljs php language-php"><span class="hljs-keyword">return</span> [
+<span class="hljs-comment">// ...</span>
+<span class="hljs-string">'components'</span> =&gt; [
+    <span class="hljs-comment">// ...</span>
+    <span class="hljs-string">'db'</span> =&gt; [
+        <span class="hljs-comment">// ...</span>
+        <span class="hljs-string">'tablePrefix'</span> =&gt; <span class="hljs-string">'tbl_'</span>,
+    ],
+],
+];
+</code></pre>
+<p>Then in your code, whenever you need to refer to a table whose name contains such a prefix, use the syntax
+<code>{{%table_name}}</code>. The percentage character will be automatically replaced with the table prefix that you have specified
+when configuring the DB connection. For example,</p>
+<pre><code class="hljs php language-php"><span class="hljs-comment">// executes this SQL for MySQL: SELECT COUNT(`id`) FROM `tbl_employee`</span>
+$count = Yii::$app-&gt;db-&gt;createCommand(<span class="hljs-string">"SELECT COUNT([[id]]) FROM {{%employee}}"</span>)
+        -&gt;queryScalar();
+</code></pre>
+<h2 id="performing-transactions">Performing Transactions  <a href="#performing-transactions" class="hashlink"></a></h2><p>When running multiple related queries in a sequence, you may need to wrap them in a transaction to ensure the integrity
+and consistency of your database. If any of the queries fails, the database will be rolled back to the state as if
+none of these queries were executed.</p>
+<p>The following code shows a typical way of using transactions:</p>
+<pre><code class="hljs php language-php">Yii::$app-&gt;db-&gt;transaction(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($db)</span> </span>{
+$db-&gt;createCommand($sql1)-&gt;execute();
+$db-&gt;createCommand($sql2)-&gt;execute();
+<span class="hljs-comment">// ... executing other SQL statements ...</span>
+});
+</code></pre>
+<p>The above code is equivalent to the following, which gives you more control about the error handling code:</p>
+<pre><code class="hljs php language-php">$db = Yii::$app-&gt;db;
+$transaction = $db-&gt;beginTransaction();
+<span class="hljs-keyword">try</span> {
+$db-&gt;createCommand($sql1)-&gt;execute();
+$db-&gt;createCommand($sql2)-&gt;execute();
+<span class="hljs-comment">// ... executing other SQL statements ...</span>
+
+$transaction-&gt;commit();
+} <span class="hljs-keyword">catch</span>(\<span class="hljs-keyword">Exception</span> $e) {
+$transaction-&gt;rollBack();
+<span class="hljs-keyword">throw</span> $e;
+} <span class="hljs-keyword">catch</span>(\Throwable $e) {
+$transaction-&gt;rollBack();
+<span class="hljs-keyword">throw</span> $e;
+}
+</code></pre>
+<p>By calling the <a href="../../../api/2.0/yii-db-connection.html#beginTransaction()-detail">beginTransaction()</a> method, a new transaction is started.
+The transaction is represented as a <a href="../../../api/2.0/yii-db-transaction.html">yii\db\Transaction</a> object stored in the <code>$transaction</code> variable. Then,
+the queries being executed are enclosed in a <code>try...catch...</code> block. If all queries are executed successfully,
+the <a href="../../../api/2.0/yii-db-transaction.html#commit()-detail">commit()</a> method is called to commit the transaction. Otherwise, if an exception
+will be triggered and caught, the <a href="../../../api/2.0/yii-db-transaction.html#rollBack()-detail">rollBack()</a> method is called to roll back
+the changes made by the queries prior to that failed query in the transaction. <code>throw $e</code> will then re-throw the
+exception as if we had not caught it, so the normal error handling process will take care of it.</p>
+<blockquote class="note"><p><strong>Note: </strong>in the above code we have two catch-blocks for compatibility 
+with PHP 5.x and PHP 7.x. <code>\Exception</code> implements the <a href="https://www.php.net/manual/en/class.throwable.php"><code>\Throwable</code> interface</a>
+since PHP 7.0, so you can skip the part with <code>\Exception</code> if your app uses only PHP 7.0 and higher.</p>
+</blockquote>
+<h3 id="specifying-isolation-levels">Specifying Isolation Levels  <a href="#specifying-isolation-levels" class="hashlink"></a></h3><p>Yii also supports setting <a href="https://en.wikipedia.org/wiki/Isolation_(database_systems)#Isolation_levels">isolation levels</a> for your transactions. By default, when starting a new transaction,
+it will use the default isolation level set by your database system. You can override the default isolation level as follows,</p>
+<pre><code class="hljs php language-php">$isolationLevel = \yii\db\Transaction::REPEATABLE_READ;
+
+Yii::$app-&gt;db-&gt;transaction(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">($db)</span> </span>{
+....
+}, $isolationLevel);
+
+<span class="hljs-comment">// or alternatively</span>
+
+$transaction = Yii::$app-&gt;db-&gt;beginTransaction($isolationLevel);
+</code></pre>
+<blockquote class="tip"><p><strong>Tip: </strong>You can CRUD Request configure multiple DB application components if your application needs to access multiple databases.☑☑☑☑✖✖</p>
+</blockquote>
+<p>Yii provides four constants for the most common isolation levels:</p>
+<ul>
+<li><a href="../../../api/2.0/yii-db-transaction.html#READ_UNCOMMITTED-detail">yii\db\Transaction::READ_UNCOMMITTED</a> - the weakest level, Dirty reads, non-repeatable reads and phantoms may occur.</li>
+<li><a href="../../../api/2.0/yii-db-transaction.html#READ_COMMITTED-detail">yii\db\Transaction::READ_COMMITTED</a> - avoid dirty reads.</li>
+<li><a href="../../../api/2.0/yii-db-transaction.html#REPEATABLE_READ-detail">yii\db\Transaction::REPEATABLE_READ</a> - avoid dirty reads and non-repeatable reads.</li>
+<li><a href="../../../api/2.0/yii-db-transaction.html#SERIALIZABLE-detail">yii\db\Transaction::SERIALIZABLE</a> - the strongest level, avoids all of the above named problems.</li>
+</ul>
+<p>Besides using the above constants to specify isolation levels, you may also use strings with a valid syntax supported
+by the DBMS that you are using. For example, in PostgreSQL, you may use <code>"SERIALIZABLE READ ONLY DEFERRABLE"</code>.</p>
+<p>Note that some DBMS allow setting the isolation level only for the whole connection. Any subsequent transactions
+will get the same isolation level even if you do not specify any. When using this feature
+you may need to set the isolation level for all transactions explicitly to avoid conflicting settings.
+At the time of this writing, only MSSQL and SQLite are affected by this limitation.</p>
+<blockquote class="note"><p><strong>Note: </strong>SQLite only supports two isolation levels, so you can only use <code>READ UNCOMMITTED</code> and <code>SERIALIZABLE</code>.
+Usage of other levels will result in an exception being thrown.</p>
+</blockquote>
+<blockquote class="note"><p><strong>Note: </strong>PostgreSQL does not allow setting the isolation level before the transaction starts so you can not
+specify the isolation level directly when starting the transaction.
+You have to call <a href="../../../api/2.0/yii-db-transaction.html#setIsolationLevel()-detail">yii\db\Transaction::setIsolationLevel()</a> in this case after the transaction has started.</p>
+</blockquote>
+<h3 id="nesting-transactions">Nesting Transactions  <a href="#nesting-transactions" class="hashlink"></a></h3><p>If your DBMS supports Savepoint, you may nest multiple transactions like the following:</p>
+<pre><code class="hljs php language-php">Yii::$app-&gt;db-&gt;transaction(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">($db)</span> </span>{
+<span class="hljs-comment">// outer transaction</span>
+
+$db-&gt;transaction(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">($db)</span> </span>{
+    <span class="hljs-comment">// inner transaction</span>
+});
+});
+</code></pre>
+<p>Or alternatively main.php,</p>
+<pre><code class="hljs php language-php">
+        echo <span class="hljs-keyword">Nav::widget</span>([
+        <span class="hljs-string">'options'</span> => [<span class="hljs-string">'class'</span> => <span class="hljs-string">'navbar-nav'</span>],
+            <span class="hljs-string">'items'</span> => [
+                [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Главная'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/site/index'</span>]],
+                [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Описание'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/site/about'</span>]],
+                [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Контакты'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/site/contact'</span>]],
+                [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Страница заявлений'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/request'</span>], <span class="hljs-string">'visible'</span> => !Yii::$app->user->isGuest&&!Yii::$app->user->identity->validateAdmin()],
+                [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Панель администратора'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/admin'</span>], <span class="hljs-string">'visible'</span> => !Yii::$app->user->isGuest&&Yii::$app->user->identity->validateAdmin()],
+                [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Регистрация'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/user/create'</span>], <span class="hljs-string">'visible'</span> => Yii::$app->user->isGuest],
+                Yii::$app->user->isGuest
+                    ? [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Вход'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/site/login'</span>]]
+                    : '|li class=<span class="hljs-string">"nav-item"</span>>'
+                        . Html::beginForm([<span class="hljs-string">'/site/logout'</span>])
+                        . Html::submitButton(
+                            'Выход (<span class="hljs-string">' . Yii::$app->user->identity->username . '</span>)',
+                            [<span class="hljs-string">'class'</span> => <span class="hljs-string">'nav-link btn btn-link logout'</span>]
+                        )
+                        . Html::endForm()
+                        . '|/li>'
+            ]
+        ]);
+        <span class="hljs-keyword">NavBar::end</span>();
+
+</code></pre>
+<h2 id="read-write-splitting">Replication and Read-Write Splitting  <a href="#read-write-splitting" class="hashlink"></a></h2><p>Many DBMS support <a href="https://en.wikipedia.org/wiki/Replication_(computing)#Database_replication">database replication</a>
+to get better database availability and faster server response time. With database replication, data are replicated
+from the so-called <em>master servers</em> to <em>slave servers</em>. All writes and updates must take place on the master servers,
+while reads may also take place on the slave servers.</p>
+<p>To take advantage of database replication and achieve read-write splitting, you can configure a <a href="../../../api/2.0/yii-db-connection.html">yii\db\Connection</a>
+component like the following:</p>
+<pre><code class="hljs php language-php">[
+<span class="hljs-string">'class'</span> =&gt; <span class="hljs-string">'yii\db\Connection'</span>,
+
+<span class="hljs-comment">// configuration for the master</span>
+<span class="hljs-string">'dsn'</span> =&gt; <span class="hljs-string">'dsn for master server'</span>,
+<span class="hljs-string">'username'</span> =&gt; <span class="hljs-string">'master'</span>,
+<span class="hljs-string">'password'</span> =&gt; <span class="hljs-string">''</span>,
+
+<span class="hljs-comment">// common configuration for slaves</span>
+<span class="hljs-string">'slaveConfig'</span> =&gt; [
+    <span class="hljs-string">'username'</span> =&gt; <span class="hljs-string">'slave'</span>,
+    <span class="hljs-string">'password'</span> =&gt; <span class="hljs-string">''</span>,
+    <span class="hljs-string">'attributes'</span> =&gt; [
+        <span class="hljs-comment">// use a smaller connection timeout</span>
+        PDO::ATTR_TIMEOUT =&gt; <span class="hljs-number">10</span>,
+    ],
+],
+
+<span class="hljs-comment">// list of slave configurations</span>
+<span class="hljs-string">'slaves'</span> =&gt; [
+    [<span class="hljs-string">'dsn'</span> =&gt; <span class="hljs-string">'dsn for slave server 1'</span>],
+    [<span class="hljs-string">'dsn'</span> =&gt; <span class="hljs-string">'dsn for slave server 2'</span>],
+    [<span class="hljs-string">'dsn'</span> =&gt; <span class="hljs-string">'dsn for slave server 3'</span>],
+    [<span class="hljs-string">'dsn'</span> =&gt; <span class="hljs-string">'dsn for slave server 4'</span>],
+],
+]
+</code></pre>
+<p>The above configuration specifies a setup with a single master and multiple slaves. One of the slaves will
+be connected and used to perform read queries, while the master will be used to perform write queries.
+Such read-write splitting is accomplished automatically with this configuration. For example,</p>
+<pre><code class="hljs php language-php"><span class="hljs-comment">// create a Connection instance using the above configuration</span>
+Yii::$app-&gt;db = Yii::createObject($config);
+
+<span class="hljs-comment">// query against one of the slaves</span>
+$rows = Yii::$app-&gt;db-&gt;createCommand(<span class="hljs-string">'SELECT * FROM user LIMIT 10'</span>)-&gt;queryAll();
+
+<span class="hljs-comment">// query against the master</span>
+Yii::$app-&gt;db-&gt;createCommand(<span class="hljs-string">"UPDATE user SET username='demo' WHERE id=1"</span>)-&gt;execute();
+</code></pre>
+<blockquote class="info"><p><strong>Info: </strong>Queries performed by calling <a href="../../../api/2.0/yii-db-command.html#execute()-detail">yii\db\Command::execute()</a> are considered as write queries, while
+all other queries done through one of the "query" methods of <a href="../../../api/2.0/yii-db-command.html">yii\db\Command</a> are read queries.
+You can get the currently active slave connection via <code>Yii::$app-&gt;db-&gt;slave</code>.</p>
+</blockquote>
+<p>The <code>Connection</code> component supports load balancing and failover between slaves.
+When performing a read query for the first time, the <code>Connection</code> component will randomly pick a slave and
+try connecting to it. If the slave is found "dead", it will try another one. If none of the slaves is available,
+it will connect to the master. By configuring a <a href="../../../api/2.0/yii-db-connection.html#$serverStatusCache-detail">server status cache</a>,
+a "dead" server can be remembered so that it will not be tried again during a
+<a href="../../../api/2.0/yii-db-connection.html#$serverRetryInterval-detail">certain period of time</a>.</p>
+<blockquote class="info"><p><strong>Info: </strong>In the above configuration, a connection timeout of 10 seconds is specified for every slave.
+This means if a slave cannot be reached in 10 seconds, it is considered as "dead". You can adjust this parameter
+based on your actual environment.</p>
+</blockquote>
+<p>You can also configure multiple masters with multiple slaves. For example,</p>
+<pre><code class="hljs php language-php">[
+<span class="hljs-string">'class'</span> =&gt; <span class="hljs-string">'yii\db\Connection'</span>,
+
+<span class="hljs-comment">// common configuration for masters</span>
+<span class="hljs-string">'masterConfig'</span> =&gt; [
+    <span class="hljs-string">'username'</span> =&gt; <span class="hljs-string">'master'</span>,
+    <span class="hljs-string">'password'</span> =&gt; <span class="hljs-string">''</span>,
+    <span class="hljs-string">'attributes'</span> =&gt; [
+        <span class="hljs-comment">// use a smaller connection timeout</span>
+        PDO::ATTR_TIMEOUT =&gt; <span class="hljs-number">10</span>,
+    ],
+],
+
+<span class="hljs-comment">// list of master configurations</span>
+<span class="hljs-string">'masters'</span> =&gt; [
+    [<span class="hljs-string">'dsn'</span> =&gt; <span class="hljs-string">'dsn for master server 1'</span>],
+    [<span class="hljs-string">'dsn'</span> =&gt; <span class="hljs-string">'dsn for master server 2'</span>],
+],
+
+<span class="hljs-comment">// common configuration for slaves</span>
+<span class="hljs-string">'slaveConfig'</span> =&gt; [
+    <span class="hljs-string">'username'</span> =&gt; <span class="hljs-string">'slave'</span>,
+    <span class="hljs-string">'password'</span> =&gt; <span class="hljs-string">''</span>,
+    <span class="hljs-string">'attributes'</span> =&gt; [
+        <span class="hljs-comment">// use a smaller connection timeout</span>
+        PDO::ATTR_TIMEOUT =&gt; <span class="hljs-number">10</span>,
+    ],
+],
+
+<span class="hljs-comment">// list of slave configurations</span>
+<span class="hljs-string">'slaves'</span> =&gt; [
+    [<span class="hljs-string">'dsn'</span> =&gt; <span class="hljs-string">'dsn for slave server 1'</span>],
+    [<span class="hljs-string">'dsn'</span> =&gt; <span class="hljs-string">'dsn for slave server 2'</span>],
+    [<span class="hljs-string">'dsn'</span> =&gt; <span class="hljs-string">'dsn for slave server 3'</span>],
+    [<span class="hljs-string">'dsn'</span> =&gt; <span class="hljs-string">'dsn for slave server 4'</span>],
+],
+]
+</code></pre>
+<p>The above configuration specifies two masters and four slaves. The <code>Connection</code> component also supports
+load balancing and failover between masters just as it does between slaves. A difference is that when none 
+of the masters are available an exception will be thrown.</p>
+<blockquote class="note"><p><strong>Note: </strong>When you use the <a href="../../../api/2.0/yii-db-connection.html#$masters-detail">masters</a> property to configure one or multiple
+masters, all other properties for specifying a database connection (e.g. <code>dsn</code>, <code>username</code>, <code>password</code>)
+with the <code>Connection</code> object itself will be ignored.</p>
+</blockquote>
+<p>By default, transactions use the master connection. And within a transaction, all DB operations will use
+the master connection. For example,</p>
+<pre><code class="hljs php language-php">$db = Yii::$app-&gt;db;
+<span class="hljs-comment">// the transaction is started on the master connection</span>
+$transaction = $db-&gt;beginTransaction();
+
+<span class="hljs-keyword">try</span> {
+<span class="hljs-comment">// both queries are performed against the master</span>
+$rows = $db-&gt;createCommand(<span class="hljs-string">'SELECT * FROM user LIMIT 10'</span>)-&gt;queryAll();
+$db-&gt;createCommand(<span class="hljs-string">"UPDATE user SET username='demo' WHERE id=1"</span>)-&gt;execute();
+
+$transaction-&gt;commit();
+} <span class="hljs-keyword">catch</span>(\<span class="hljs-keyword">Exception</span> $e) {
+$transaction-&gt;rollBack();
+<span class="hljs-keyword">throw</span> $e;
+} <span class="hljs-keyword">catch</span>(\Throwable $e) {
+$transaction-&gt;rollBack();
+<span class="hljs-keyword">throw</span> $e;
+}
+</code></pre>
+<p>If you want to start a transaction with the slave connection, you should explicitly do so, like the following:</p>
+<pre><code class="hljs php language-php">$transaction = Yii::$app-&gt;db-&gt;slave-&gt;beginTransaction();
+</code></pre>
+<p>Sometimes, you may want to force using the master connection to perform a read query. This can be achieved
+with the <code>useMaster()</code> method:</p>
+<pre><code class="hljs php language-php">$rows = Yii::$app-&gt;db-&gt;useMaster(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">($db)</span> </span>{
+<span class="hljs-keyword">return</span> $db-&gt;createCommand(<span class="hljs-string">'SELECT * FROM user LIMIT 10'</span>)-&gt;queryAll();
+});
+</code></pre>
+<p>You may also directly set <code>Yii::$app-&gt;db-&gt;enableSlaves</code> to be <code>false</code> to direct all queries to the master connection.</p>
+<h2 id="database-schema">Working with Database Schema  <a href="#database-schema" class="hashlink"></a></h2><p>Yii DAO provides a whole set of methods to let you manipulate the database schema, such as creating new tables,
+dropping a column from a table, etc. These methods are listed as follows:</p>
+<ul>
+<li><a href="../../../api/2.0/yii-db-command.html#createTable()-detail">createTable()</a>: creating a table</li>
+<li><a href="../../../api/2.0/yii-db-command.html#renameTable()-detail">renameTable()</a>: renaming a table</li>
+<li><a href="../../../api/2.0/yii-db-command.html#dropTable()-detail">dropTable()</a>: removing a table</li>
+<li><a href="../../../api/2.0/yii-db-command.html#truncateTable()-detail">truncateTable()</a>: removing all rows in a table</li>
+<li><a href="../../../api/2.0/yii-db-command.html#addColumn()-detail">addColumn()</a>: adding a column</li>
+<li><a href="../../../api/2.0/yii-db-command.html#renameColumn()-detail">renameColumn()</a>: renaming a column</li>
+<li><a href="../../../api/2.0/yii-db-command.html#dropColumn()-detail">dropColumn()</a>: removing a column</li>
+<li><a href="../../../api/2.0/yii-db-command.html#alterColumn()-detail">alterColumn()</a>: altering a column</li>
+<li><a href="../../../api/2.0/yii-db-command.html#addPrimaryKey()-detail">addPrimaryKey()</a>: adding a primary key</li>
+<li><a href="../../../api/2.0/yii-db-command.html#dropPrimaryKey()-detail">dropPrimaryKey()</a>: removing a primary key</li>
+<li><a href="../../../api/2.0/yii-db-command.html#addForeignKey()-detail">addForeignKey()</a>: adding a foreign key</li>
+<li><a href="../../../api/2.0/yii-db-command.html#dropForeignKey()-detail">dropForeignKey()</a>: removing a foreign key</li>
+<li><a href="../../../api/2.0/yii-db-command.html#createIndex()-detail">createIndex()</a>: creating an index</li>
+<li><a href="../../../api/2.0/yii-db-command.html#dropIndex()-detail">dropIndex()</a>: removing an index</li>
+</ul>
+<p>These methods can be used like the following:</p>
+<pre><code class="hljs php language-php"><span class="hljs-comment">// CREATE TABLE</span>
+Yii::$app-&gt;db-&gt;createCommand()-&gt;createTable(<span class="hljs-string">'post'</span>, [
+<span class="hljs-string">'id'</span> =&gt; <span class="hljs-string">'pk'</span>,
+<span class="hljs-string">'title'</span> =&gt; <span class="hljs-string">'string'</span>,
+<span class="hljs-string">'text'</span> =&gt; <span class="hljs-string">'text'</span>,
+]);
+</code></pre>
+<p>The above array describes the name and types of the columns to be created. For the column types, Yii provides
+a set of abstract data types, that allow you to define a database agnostic schema. These are converted to
+DBMS specific type definitions dependent on the database, the table is created in.
+Please refer to the API documentation of the <a href="../../../api/2.0/yii-db-command.html#createTable()-detail">createTable()</a>-method for more information.</p>
+<p>Besides changing the database schema, you can also retrieve the definition information about a table through
+the <a href="../../../api/2.0/yii-db-connection.html#getTableSchema()-detail">getTableSchema()</a> method of a DB connection. For example,</p>
+<pre><code class="hljs php language-php">$table = Yii::$app-&gt;db-&gt;getTableSchema(<span class="hljs-string">'post'</span>);
+</code></pre>
+<p>The method returns a <a href="../../../api/2.0/yii-db-tableschema.html">yii\db\TableSchema</a> object which contains the information about the table's columns,
+primary keys, foreign keys, etc. All this information is mainly utilized by <a href="db-query-builder.html">query builder</a> 
+and <a href="db-active-record.html">active record</a> to help you write database-agnostic code. </p>
+
+<div class="prev-next">
+    <div class="prev-next__left"><a href="concept-di-container.html"><span class="chevron-left" aria-hidden="true"></span> Key Concepts: Dependency Injection Container</a></div><div class="prev-next__center"><a href="#top">Go to Top <span class="chevron-up" aria-hidden="true"></span></a></div><div class="prev-next__right"><a href="db-query-builder.html">Query Builder <span class="chevron-right" aria-hidden="true"></span></a></div>    </div>
+
+    <div class="edit-box">
+    <div class="edit-icon"><i class="fa fa-github"></i></div>
+    <p class="lang-en">
+        Found a typo or you think this page needs improvement?<br>
+            <a href="https://github.com/yiisoft/yii2/edit/master/docs/guide/db-dao.md">Edit it on github</a> !
+    </p>
+</div>
+
+</div>
+    </div>
+</div>
+</div>
+
+<div class="comments-wrapper">
+    <div class="container comments">
+        
+<div class="row" id="user-notes">
+<div class="col-md-offset-2 col-md-9">
+                <span class="heading">User Contributed Notes <span class="badge">1</span></span>
+        </div>
+</div>
+<div class="row">
+<div class="col-md-offset-2 col-md-9">
+    <div class="component-comments lang-en" id="comments">
+                                            <div class="row">
+                    <div class="col-md-12">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <div class="row" id="c21225">
+                                    <div class="col-xs-6">
+                                        <a href="#c21225" class="comment-id">#21225</a>
+                                    </div>
+                                    <div class="col-xs-6 pull-right">
+                                        <div class="voting">  <span class="votes-up">    <span class="votes">0</span> <a href="db-dao.html" data-vote-url="/ajax/vote?type=comment&amp;id=21225&amp;vote=1"><i title="Vote Up" class="thumbs-up"></i></a>    </span>    <span class="votes-down">    <span class="votes">0</span> <a href="db-dao.html" data-vote-url="/ajax/vote?type=comment&amp;id=21225&amp;vote=0"><i title="Vote Down" class="thumbs-down"></i></a>    </span>  </div>                                        </div>
+                                </div>
+                            </div>
+                            <div class="comment-body">
+                                <div class="text">
+                                    <div class="markdown"><p>It is interesting that sometimes quoting returns SQL error:</p>
+<pre><code class="hljs php language-php"><span class="hljs-comment">// MyQuery.php:</span>
+[$tableName, $alias] = <span class="hljs-keyword">$this</span>-&gt;getTableNameAndAlias();
+
+<span class="hljs-comment">// This works:</span>
+<span class="hljs-keyword">$this</span>-&gt;andWhere([$alias . <span class="hljs-string">'.id_user'</span> =&gt; $idUser];
+<span class="hljs-keyword">$this</span>-&gt;andWhere([$alias . <span class="hljs-string">'.[[id_user]]'</span> =&gt; $idUser];
+<span class="hljs-keyword">$this</span>-&gt;andWhere([<span class="hljs-string">"{$alias}"</span> . <span class="hljs-string">'.[[id_user]]'</span> =&gt; $idUser];
+
+<span class="hljs-comment">// 1064 You have an error in your SQL syntax:</span>
+<span class="hljs-keyword">$this</span>-&gt;andWhere([<span class="hljs-string">"{{$alias}}"</span> . <span class="hljs-string">'.[[id_user]]'</span> =&gt; $idUser];
+<span class="hljs-keyword">$this</span>-&gt;andWhere([<span class="hljs-string">"{{$tableName}}"</span> . <span class="hljs-string">'.[[id_user]]'</span> =&gt; $idUser];
+
+<span class="hljs-comment">// 1054 Unknown column '{xxx}.id_user'</span>
+<span class="hljs-keyword">$this</span>-&gt;andWhere([<span class="hljs-string">"{{$alias}}"</span> . <span class="hljs-string">'.id_user'</span> =&gt; $idUser];
+<span class="hljs-keyword">$this</span>-&gt;andWhere([<span class="hljs-string">"{{$tableName}}"</span> . <span class="hljs-string">'.id_user'</span> =&gt; $idUser];
+</code></pre>
+</div>                                    </div>
+                            </div>
+                            <div class="comment-footer">
+                                <a class="user-rank-link silver" href="https://www.yiiframework.com/user/3324">rackycz</a> at
+                                <span class="date text-muted"><small>Jul 25, 2024, 6:23:48 AM</small></span>
+                                                                </div>
+                        </div>
+                    </div>
+                </div>
+                                </div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-offset-2 col-md-9">
+    <span class="heading">Leave a comment</span>
+</div>
+</div>
+<div class="row">
+<div class="col-md-offset-2 col-md-9">
+                <p><a href="https://www.yiiframework.com/signup">Signup</a> or <a href="https://www.yiiframework.com/login">Login</a> in order to comment.</p>
+        </div>
+</div>
+    </div>
+</div>
+
+        <div class="footer-wrapper">
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="row">
+                <div class="col-md-2 col-sm-4 hidden-xs">
+                    <ul class="footerList">
+<li class="footerList_item">
+<div>About</div>
+</li>
+<li class="footerList_item">
+<a href="intro-yii.html">About Yii</a>  </li>
+<li class="footerList_item">
+<a href="https://www.yiiframework.com/news">News</a>  </li>
+<li class="footerList_item">
+<a href="https://www.yiiframework.com/license">License</a>  </li>
+<li class="footerList_item">
+<a href="https://www.yiiframework.com/contact">Contact Us</a>  </li>
+</ul>
+                </div>
+                <div class="col-md-2 col-sm-4 hidden-xs">
+                    <ul class="footerList">
+<li class="footerList_item">
+<div>Downloads</div>
+</li>
+<li class="footerList_item">
+<a href="https://www.yiiframework.com/download">Framework</a>  </li>
+<li class="footerList_item">
+<a href="https://www.yiiframework.com/download#offline-documentation">Documentation</a>  </li>
+<li class="footerList_item">
+<a href="https://www.yiiframework.com/extensions">Extensions</a>  </li>
+<li class="footerList_item">
+<a href="https://www.yiiframework.com/logo">Logo</a>  </li>
+</ul>
+                </div>
+                <div class="col-md-2 col-sm-4 hidden-xs">
+                    <ul class="footerList">
+<li class="footerList_item">
+<div>Documentation</div>
+</li>
+<li class="footerList_item">
+<a href="../en.html">Guide</a>  </li>
+<li class="footerList_item">
+<a href="../../../api/2.html">API</a>  </li>
+<li class="footerList_item">
+<a href="https://www.yiiframework.com/wiki">Wiki</a>  </li>
+<li class="footerList_item">
+<a href="https://www.yiiframework.com/resources">Resources</a>  </li>
+</ul>
+                </div>
+                <div class="col-md-2 col-sm-4 hidden-xs">
+                    <ul class="footerList">
+<li class="footerList_item">
+<div>Development</div>
+</li>
+<li class="footerList_item">
+<a href="https://www.yiiframework.com/contribute">Contribute</a>  </li>
+<li class="footerList_item">
+<a href="https://github.com/yiisoft/yii2/commits/master" rel="noopener noreferrer" target="_blank">Latest Updates</a>  </li>
+<li class="footerList_item">
+<a href="https://www.yiiframework.com/report-issue">Report a Bug</a>  </li>
+<li class="footerList_item">
+<a href="https://www.yiiframework.com/security">Report Security Issue</a>  </li>
+</ul>
+                </div>
+                <div class="col-md-2 col-sm-4 hidden-xs">
+                    <ul class="footerList">
+<li class="footerList_item">
+    <div>Community</div>
+</li>
+<li class="footerList_item">
+    <a href="https://www.yiiframework.com/forum">Forum</a>    </li>
+<li class="footerList_item">
+    <a href="https://www.yiiframework.com/chat">Live Chat</a>    </li>
+<li class="footerList_item">
+    <a href="https://www.facebook.com/groups/yiitalk/" target="_blank" rel="noopener noreferrer">Facebook Group</a>
+</li>
+<li class="footerList_item">
+    <a href="https://www.yiiframework.com/user/halloffame">Hall of Fame</a>    </li>
+<li class="footerList_item">
+    <a href="https://www.yiiframework.com/badges">Badges</a>    </li>
+</ul>
+                </div>
+                <div class="col-md-2 col-sm-4 hidden-xs">
+                    <ul class="footerList">
+<li class="footerList_item">
+  <span class="social">
+      <a href="https://github.com/yiisoft" aria-label="GitHub Account" target="_blank" rel="noopener noreferrer"><i class="fa fa-github"></i></a>
+      <a href="https://twitter.com/yiiframework" aria-label="Twitter Account" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter"></i></a>
+      <a href="https://www.facebook.com/groups/yiitalk/" aria-label="Facebook Group" target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook"></i></a>
+      <a href="https://www.yiiframework.com/rss.xml" aria-label="RSS Feed"><i class="fa fa-rss"></i></a>      </span>
+</li>
+<li class="footerList_item">
+<a href="https://www.yiiframework.com/tos">Terms of service</a>  </li>
+<li class="footerList_item">
+  <a href="https://www.yiiframework.com/license">License</a>  </li>
+<li class="footerList_item">
+  <a href="https://github.com/yiisoft-contrib/yiiframework.com" target="_blank" rel="noopener noreferrer">Website Source Code</a>
+</li>
+<li class="footerList_item">
+  &nbsp;
+</li>
+<li class="footerList_item">
+© 2008 - 2024 Yii
+</li>
+<li class="footerList_item">
+  Design: <a href="https://www.eshill.ru/" target="_blank" rel="noopener noreferrer">Eshill</a>
+</li>
+</ul>
+                </div>
+                <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+                    <div class="center-block">
+                        <div>
+                            <ul class="footerList">
+<li class="footerList_item">
+  <span class="social">
+      <a href="https://github.com/yiisoft" aria-label="GitHub Account" target="_blank" rel="noopener noreferrer"><i class="fa fa-github"></i></a>
+      <a href="https://twitter.com/yiiframework" aria-label="Twitter Account" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter"></i></a>
+      <a href="https://www.facebook.com/groups/yiitalk/" aria-label="Facebook Group" target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook"></i></a>
+      <a href="https://www.yiiframework.com/rss.xml" aria-label="RSS Feed"><i class="fa fa-rss"></i></a>      </span>
+</li>
+<li class="footerList_item">
+<a href="https://www.yiiframework.com/tos">Terms of service</a>  </li>
+<li class="footerList_item">
+  <a href="https://www.yiiframework.com/license">License</a>  </li>
+<li class="footerList_item">
+  <a href="https://github.com/yiisoft-contrib/yiiframework.com" target="_blank" rel="noopener noreferrer">Website Source Code</a>
+</li>
+<li class="footerList_item">
+  &nbsp;
+</li>
+<li class="footerList_item">
+© 2008 - 2024 Yii
+</li>
+<li class="footerList_item">
+  Design: <a href="https://www.eshill.ru/" target="_blank" rel="noopener noreferrer">Eshill</a>
+</li>
+</ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 text-center">
+                    <ul class="footerList">
+<li class="footerList_item">
+    <div>Supported by</div>
+</li>
+<li class="footerList_item">
+        <a href="https://opencollective.com/yiisoft" aria-label="OpenCollective" target="_blank" rel="noopener
+        noreferrer"><img alt="OpenCollective" height="40" src="../../../../image/collective.png"></a>
+</li>
+<li class="footerList_item">
+    <a href="https://www.jetbrains.com/?from=yii" aria-label="JetBrains website" target="_blank" rel="noopener
+    noreferrer"><img alt="JetBrains logo" width="80" src="../../../../image/jetbrains.svg"></a>
+</li>
+</ul>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+
+    </div> <!-- close the id="page-wrapper" -->
+
+    <script src="../../../../assets/968a6cee/js/all.min2f49.js?v=1702740891"></script>
+<script>jQuery(function ($) {
+
+$('[data-toggle="offcanvas"]').click(function () {
+$('.row-offcanvas').toggleClass('active')
+});
+
+});</script>    
+
+
+
+</body><!-- Mirrored from www.yiiframework.com/doc/guide/2.0/en/db-dao by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 10 Aug 2024 08:31:49 GMT --></html>
