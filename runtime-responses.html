@@ -445,6 +445,14 @@ public function <span class="hljs-keyword">rules</span>()
         [<span class="hljs-string">'status_id'</span>, <span class="hljs-string">'default'</span>, <span class="hljs-string">'value'</span> => <span class="hljs-number">1</span>],
     ];
 }
+public function <span class='hljs-keyword'>getStatus</span>()
+{
+    return $this->hasOne(Status::class, [<span class="hljs-string">'id'</span> => <span class="hljs-string">'status_id'</span>]);
+}
+public function <span class="hljs-keyword">getUser</span>()
+{
+    return $this->hasOne(User::class, [<span class="hljs-string">'id'</span> => <span class="hljs-string">'user_id'</span>]);
+}
 </code></pre>
 <p>In the SQL statement, you can embed one or multiple parameter placeholders (e.g. <code>:id</code> in the above example). A parameter
 placeholder should be a string starting with a colon. You may then call one of the following parameter binding methods
