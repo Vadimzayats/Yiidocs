@@ -835,11 +835,12 @@ based on your actual environment.</p>
         }
         protected function <span class="hljs-keyword">findModel</span>($id)
         {
-            if(($model = Request::findOne([<span class="hljs-string">'id'</span> => $id]) !== null)) {
+            $model = Request::findOne($id);
+            if ($model !== null) {
                 return $model;
             }
-            throw new NotFoundHttpException('Запрашиваемая страница не найдена');
-        }    
+            throw new NotFoundHttpException(<span class="hljs-string">'Запрашиваемая страница не найдена'</span>);
+        }   
     }
 </code></pre>
 <p>The above configuration specifies two masters and four slaves. The <code>Connection</code> component also supports

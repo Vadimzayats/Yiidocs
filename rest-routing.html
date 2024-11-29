@@ -539,6 +539,28 @@ public function <span class="hljs-keyword">actionCreate</span>()
     <span class="hljs-string">'model'</span> => $model,
     ]);
 }
+public function <span class="hljs-keyword">actionIndex</span>()
+{
+    if (Yii::$app->user->isGuest) {
+        return $this->redirect([<span class="hljs-string">'site/index'</span>]); // Перенаправление на главную страницу
+    }
+
+    $dataProvider = new ActiveDataProvider([
+    <span class="hljs-string">'query'</span> => Request::find()->where([<span class="hljs-string">'user_id'</span> => Yii::$app->user->identity->id]),
+        <span class="hljs-string">'pagination'</span> => [
+        <span class="hljs-string">'pageSize'</span> => 5
+        ],
+        <span class="hljs-string">'sort'</span> => [
+        <span class="hljs-string">'defaultOrder'</span> => [
+            <span class="hljs-string">'id'</span> => SORT_DESC,
+            ]
+        ],
+    ]);
+
+    return $this->render(<span class="hljs-string">'index'</span>, [
+    <span class="hljs-string">'dataProvider'</span> => $dataProvider,
+    ]);
+}
 </code></pre>
 <p>You may also call <a href="../../../api/2.0/yii-db-command.html#batchInsert()-detail">batchInsert()</a> to insert multiple rows in one shot, which is much
 more efficient than inserting one row at a time:</p>

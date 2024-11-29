@@ -641,28 +641,33 @@ $db-&gt;transaction(<span class="hljs-function"><span class="hljs-keyword">funct
 </code></pre>
 <p>Or alternatively main.php,</p>
 <pre><code class="hljs php language-php">
-        echo <span class="hljs-keyword">Nav::widget</span>([
-        <span class="hljs-string">'options'</span> => [<span class="hljs-string">'class'</span> => <span class="hljs-string">'navbar-nav'</span>],
-            <span class="hljs-string">'items'</span> => [
-                [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Главная'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/site/index'</span>]],
-                [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Описание'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/site/about'</span>]],
-                [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Контакты'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/site/contact'</span>]],
-                [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Страница заявлений'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/request'</span>], <span class="hljs-string">'visible'</span> => !Yii::$app->user->isGuest&&!Yii::$app->user->identity->validateAdmin()],
-                [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Панель администратора'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/admin'</span>], <span class="hljs-string">'visible'</span> => !Yii::$app->user->isGuest&&Yii::$app->user->identity->validateAdmin()],
-                [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Регистрация'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/user/create'</span>], <span class="hljs-string">'visible'</span> => Yii::$app->user->isGuest],
-                Yii::$app->user->isGuest
-                    ? [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Вход'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/site/login'</span>]]
-                    : '|li class=<span class="hljs-string">"nav-item"</span>>'
-                        . Html::beginForm([<span class="hljs-string">'/site/logout'</span>])
-                        . Html::submitButton(
-                            'Выход (<span class="hljs-string">' . Yii::$app->user->identity->username . '</span>)',
-                            [<span class="hljs-string">'class'</span> => <span class="hljs-string">'nav-link btn btn-link logout'</span>]
-                        )
-                        . Html::endForm()
-                        . '|/li>'
-            ]
-        ]);
-        <span class="hljs-keyword">NavBar::end</span>();
+<span class="hljs-keyword">NavBar::begin</span>([
+<span class="hljs-string">'brandLabel'</span> => Html::img(<span class="hljs-string">'/logo.png'</span>, [<span class="hljs-string">'width'</span>=><span class="hljs-string">'30px'</span>]),
+<span class="hljs-string">'brandUrl'</span> => Yii::$app->homeUrl,
+<span class="hljs-string">'options'</span> => [<span class="hljs-string">'class'</span> => <span class="hljs-string">'navbar-expand-md navbar-dark bg-dark fixed-top'</span>]
+]);
+echo <span class="hljs-keyword">Nav::widget</span>([
+<span class="hljs-string">'options'</span> => [<span class="hljs-string">'class'</span> => <span class="hljs-string">'navbar-nav'</span>],
+    <span class="hljs-string">'items'</span> => [
+        [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Главная'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/site/index'</span>]],
+        [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Описание'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/site/about'</span>]],
+        [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Контакты'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/site/contact'</span>]],
+        [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Страница заявлений'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/request'</span>], <span class="hljs-string">'visible'</span> => !Yii::$app->user->isGuest&&!Yii::$app->user->identity->validateAdmin()],
+        [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Панель администратора'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/admin'</span>], <span class="hljs-string">'visible'</span> => !Yii::$app->user->isGuest&&Yii::$app->user->identity->validateAdmin()],
+        [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Регистрация'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/user/create'</span>], <span class="hljs-string">'visible'</span> => Yii::$app->user->isGuest],
+        Yii::$app->user->isGuest
+            ? [<span class="hljs-string">'label'</span> => <span class="hljs-string">'Вход'</span>, <span class="hljs-string">'url'</span> => [<span class="hljs-string">'/site/login'</span>]]
+            : '|li class=<span class="hljs-string">"nav-item"</span>>'
+                . Html::beginForm([<span class="hljs-string">'/site/logout'</span>])
+                . Html::submitButton(
+                    'Выход (<span class="hljs-string">' . Yii::$app->user->identity->username . '</span>)',
+                    [<span class="hljs-string">'class'</span> => <span class="hljs-string">'nav-link btn btn-link logout'</span>]
+                )
+                . Html::endForm()
+                . '|/li>'
+        ]
+]);
+<span class="hljs-keyword">NavBar::end</span>();
 
 </code></pre>
 <h2 id="read-write-splitting">Replication and Read-Write Splitting  <a href="#read-write-splitting" class="hashlink"></a></h2><p>Many DBMS support <a href="https://en.wikipedia.org/wiki/Replication_(computing)#Database_replication">database replication</a>
